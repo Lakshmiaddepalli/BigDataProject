@@ -1,0 +1,7 @@
+hdfs dfs -put Crimes_-_2001_to_present.csv   hdfs:///user/sla410/crimedatabigdataproject/
+hdfs dfs -put Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012.csv hdfs:///user/sla410/crimedatabigdataproject/
+hdfs dfs -put Sex_Offenders_final.csv   hdfs:///user/sla410/crimedatabigdataproject/
+hdfs dfs -put Chicago_Police_Department_-_Illinois_Uniform_Crime_Reporting__IUCR__Codes.csv hdfs:///user/sla410/crimedatabigdataproject/
+hdfs dfs -put 311_Service_Requests_-_Vacant_and_Abandoned_Buildings_Reported_-_Historical.csv   hdfs:///user/sla410/crimedatabigdataproject/
+hdfs dfs -put Food_Inspections_modified.csv hdfs:///user/sla410/crimedatabigdataproject/
+hdfs dfs -put Affordable_Rental_Housing_Developments.csv   hdfs:///user/sla410/crimedatabigdataproject/
