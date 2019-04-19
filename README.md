@@ -21,6 +21,6 @@ https://github.com/craigmbooth/chicago_neighborhood_finder
 
 
 Team Members:
-1. Sree Lakshmi Addepalli
+1. Sree Lakshmi Addepalli(sla410)
 2. Divya Juneja
-3. Sree Gowri Addepalli
+3. Sree Gowri Addepalli (sga297)
