@@ -1,5 +1,8 @@
 ﻿spark-shell --packages com.databricks:spark-csv_2.10:1.5.0
 import org.apache.spark.sql.SQLContext
+from pyspark.sql.functions import col
+
+
 val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 var df = sqlContext.read.format("csv").option("header", "true").load("hdfs:///user/dj1322/crime_project/311_Service_Requests_-_Vacant_and_Abandoned_Buildings_Reported_-_Historical.csv")
 df = df.withColumn("Date_of_Service", $"DATE SERVICE REQUEST WAS RECEIVED")
@@ -37,25 +40,37 @@ df = df.withColumn("Date_of_Service", $"DATE SERVICE REQUEST WAS RECEIVED")
 
 
 df.printSchema()
-df.filter(df("SERVICE REQUEST TYPE").isNull || df("SERVICE REQUEST TYPE") === "" || df("SERVICE REQUEST TYPE").isNaN).count() //gave 0
+df.filter(df("SERVICE REQUEST TYPE").isNull || df("SERVICE REQUEST TYPE") === "" || df("SERVICE REQUEST TYPE").isNaN).count() //gave 3
 
 
-df.filter(df("SERVICE REQUEST NUMBER").isNull || df("SERVICE REQUEST NUMBER") === "" || df("SERVICE REQUEST NUMBER").isNaN).count() //gave 0
+df = df.filter(!($"SERVICE REQUEST TYPE"===""))
 
 
-
-
-df.filter(df("IS THE BUILDING CURRENTLY VACANT OR OCCUPIED?").isNull || df("IS THE BUILDING CURRENTLY VACANT OR OCCUPIED?") === "" || df("IS THE BUILDING CURRENTLY VACANT OR OCCUPIED?").isNaN).count() //0
-
+df.filter(df("SERVICE REQUEST NUMBER").isNull || df("SERVICE REQUEST NUMBER") === "" || df("SERVICE REQUEST NUMBER").isNaN).count() // gave 0
 
 
 
-df.filter(df("ANY PEOPLE USING PROPERTY? (HOMELESS, CHILDEN, GANGS)").isNull || df("ANY PEOPLE USING PROPERTY? (HOMELESS, CHILDEN, GANGS)") === "" || df("ANY PEOPLE USING PROPERTY? (HOMELESS, CHILDEN, GANGS)").isNaN).count()
 
 
-df.filter(df("IS THE BUILDING VACANT DUE TO FIRE?").isNull || df("IS THE BUILDING VACANT DUE TO FIRE?") === "" || df("IS THE BUILDING VACANT DUE TO FIRE?").isNaN).count()
+
+df.filter(df("IS THE BUILDING CURRENTLY VACANT OR OCCUPIED?").isNull || df("IS THE BUILDING CURRENTLY VACANT OR OCCUPIED?") === "" || df("IS THE BUILDING CURRENTLY VACANT OR OCCUPIED?").isNaN).count() // 8248
 
 
+df = df.filter(!($"IS THE BUILDING CURRENTLY VACANT OR OCCUPIED?"===""))
+
+
+
+
+df.filter(df("ANY PEOPLE USING PROPERTY? (HOMELESS, CHILDEN, GANGS)").isNull || df("ANY PEOPLE USING PROPERTY? (HOMELESS, CHILDEN, GANGS)") === "" || df("ANY PEOPLE USING PROPERTY? (HOMELESS, CHILDEN, GANGS)").isNaN).count() //305
+
+
+df = df.filter(!($"ANY PEOPLE USING PROPERTY? (HOMELESS, CHILDEN, GANGS)"===""))
+
+
+df.filter(df("IS THE BUILDING VACANT DUE TO FIRE?").isNull || df("IS THE BUILDING VACANT DUE TO FIRE?") === "" || df("IS THE BUILDING VACANT DUE TO FIRE?").isNaN).count() //613
+
+
+df = df.filter(!($"IS THE BUILDING VACANT DUE TO FIRE?"===""))
 
 
 
@@ -82,3 +97,6 @@ df = df.filter(!($"LONGITUDE"===""))
 Todo get its latitude and longitude and get the community area
 //we filter out data that doesn’t Community Area as it is an important parameter 
 df.filter(df("Community Area").isNull || df("Community Area") === "" || df("Community Area").isNaN).count()
+
+
+df = df.filter(!($"Community Area"===""))
