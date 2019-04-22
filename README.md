@@ -8,9 +8,9 @@ We are using the following data to analyse best community to live in Chicago. we
 2. Socioeconomic_Indicators (Presently Used)
 3. 311 Service Requests - Vacant and Abandoned Buildings Reported.csv (Presently Used)
 4. Crimes Description (Presently Used)
-5. Food Inspection (Presently Used)
-6. Sex Offenders (Presently Used)
-7. neighbourhoods (shape file) (Presently Used)
+5. Sex Offenders (Presently Used)
+6. neighbourhoods (shape file) (Presently Used)
+7. Food Inspection (Presently Used/Future Work)
 8. Affordable Rental Housing (Future Work)
 
 All the data can be found on https://data.cityofchicago.org/
