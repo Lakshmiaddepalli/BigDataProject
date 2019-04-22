@@ -122,7 +122,39 @@ It provides the neighbourhoods names when given a longitude and latitude. It can
 
 The shapefile provided on the Chicago Open Data Portal was used to convert it to a JSON file, with keys for each neighborhood, and corresponding values gave the latitude and longitude of the neighborhood.
 
+## 4. Socio- Economic Factors()
 
+https://data.cityofchicago.org/Health-Human-Services/Census-Data-Selected-socioeconomic-indicators-in-C/kn9c-c2s2
 
+schema - Till Date
+
+This dataset contains a selection of six socioeconomic indicators of public health significance and a “hardship index,” by Chicago community area, for the years 2008 – 2012. The indicators are 
+
+i) the percent of occupied housing units with more than one person per room (i.e., crowded housing)
+ii)the percent of households living below the federal poverty level
+iii) the percent of persons in the labor force over the age of 16 years that are unemployed
+iv) the percent of persons over the age of 25 years without a high school diploma
+v) the percent of the population under 18 or over 64 years of age (i.e., dependency); and per capita income
+vi) Hardship Index
+
+root
+ |-- Community Area: string (nullable = true)
+ 
+ |-- COMMUNITY AREA NAME: string (nullable = true)
+ 
+ |-- PERCENT OF HOUSING CROWDED: string (nullable = true)
+ 
+ |-- PERCENT HOUSEHOLDS BELOW POVERTY: string (nullable = true)
+ 
+ |-- PERCENT AGED 16+ UNEMPLOYED: string (nullable = true)
+ 
+ |-- PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA: string (nullable = true)
+ 
+ |-- PERCENT AGED UNDER 18 OR OVER 64: string (nullable = true)
+ 
+ |-- PER CAPITA INCOME : string (nullable = true)
+ 
+ |-- HARDSHIP INDEX: string (nullable = true)
+ 
  
  
