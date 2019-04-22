@@ -69,7 +69,7 @@ root
 
  6. Rest columns have 0 null values or empty values.
  
- ## 2. Sex Offenders
+ ## 2. Sex Offenders Dataset
  
  https://data.cityofchicago.org/Public-Safety/Sex-Offenders/vc9r-bqvy
  
@@ -111,6 +111,17 @@ root
  i.Used the communities areas shape file dataset given by Chicago government and generated a json for range of geopoints for each community. Later we tagged the unknown community area by passing the latitude and longitude.
 
 ii.Still there were few values giving none and not being detected any community. We further went ahead and generated a script which calculated the Euclidean Squared Distance Metric from each community area center and later the nearest community area was set to this row.
+
+## 3. Community Areas (shape file) Dataset
+
+https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Community-Areas-current-/cauq-8yn6
+
+schema - Till Date
+
+It provides the neighbourhoods names when given a longitude and latitude. It can return two values None or the corresponding communities names.
+
+The shapefile provided on the Chicago Open Data Portal was used to convert it to a JSON file, with keys for each neighborhood, and corresponding values gave the latitude and longitude of the neighborhood.
+
 
 
  
