@@ -1,6 +1,7 @@
-#1. Crimes Dataset
+## 1. Crimes Dataset
+https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2
 
-Schema - The dates are from 2001 - present
+## Schema - The dates are from 2001 - present
 
 df.printSchema()
 
@@ -68,5 +69,49 @@ ii.Still there were few values giving none and not being detected any community.
 
 6. Rest columns have 0 null values or empty values.
  
+ ## Sex Offenders
+ 
+ https://data.cityofchicago.org/Public-Safety/Sex-Offenders/vc9r-bqvy
+ 
+ ## schema - Till Date
+ 
+ root
+ |-- LAST: string (nullable = true)
+ 
+ |-- FIRST: string (nullable = true)
+ 
+ |-- BLOCK: string (nullable = true)
+ 
+ |-- GENDER: string (nullable = true)
+ 
+ |-- RACE: string (nullable = true)
+ 
+ |-- BIRTH DATE: string (nullable = true)
+ 
+ |-- AGE: string (nullable = true)
+ 
+ |-- HEIGHT: string (nullable = true)
+ 
+ |-- WEIGHT: string (nullable = true)
+ 
+ |-- VICTIM MINOR: string (nullable = true)
+ 
+ |-- latitude: string (nullable = true)
+ 
+ |-- longitude: string (nullable = true)
+ 
+ |-- Community Area Name: string (nullable = true)
+ 
+ |-- Community Area Number: string (nullable = true)
+ 
+ To link crimes dataframe to sex offenders and get the scoring algorithm we needed to generate the community area name and community area number from the partial block address given.
+ 
+ The following approaches were followed:
+ 
+ i.Used the communities areas shape file dataset given by Chicago government and generated a json for range of geopoints for each community. Later we tagged the unknown community area by passing the latitude and longitude.
+
+ii.Still there were few values giving none and not being detected any community. We further went ahead and generated a script which calculated the Euclidean Squared Distance Metric from each community area center and later the nearest community area was set to this row.
+
+
  
  
