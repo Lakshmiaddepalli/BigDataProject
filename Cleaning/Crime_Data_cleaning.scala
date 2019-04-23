@@ -29,6 +29,7 @@ def dateclean(date:String) : String = {
 val todate = udf[String,String](dateclean)
 df = df.withColumn("Date_of_Crime", todate($"Date_of_Crime"))
 df = df.withColumn("Date_of_Crime", (col("Date_of_Crime").cast("date")))
+df = df.filter($"Date_of_Crime".between("2010-01-01", "2011-12-31"))
 df = df.filter($"Date_of_Crime".between("2008-01-01", "2011-12-31"))
 
 
@@ -53,27 +54,15 @@ df.filter(df("Updated On").isNull || df("Updated On") === "" || df("Updated On")
 df.filter(df("Latitude").isNull || df("Latitude") === "" || df("Latitude").isNaN).count() //850
 df.filter(df("Longitude").isNull || df("Longitude") === "" || df("Longitude").isNaN).count() //850
 df.filter(df("Location").isNull || df("Location") === "" || df("Location").isNaN).count() //850
-df.filter(df("Date_of_Crime").isNull || df("Date_of_Crime") === "" || df("Date_of_Crime").isNaN).count() //0
+//df.filter(df("Date_of_Crime").isNull || df("Date_of_Crime") === "" || df("Date_of_Crime").isNaN).count() //0
 df.filter(df("Time").isNull || df("Time") === "" || df("Time").isNaN).count() //0
 
 
-//Todo: Gather block mapping and fil longitude and latitude then we dont need to filter out these
-//we filter out data that doesnt have X Coordinate as it is an important parameter as 
-df = df.filter(!($"X Coordinate"===""))
 
-//we filter out data that doesnt have Y Coordinate as it is an important parameter
-df = df.filter(!($"Y Coordinate"===""))
-
-//we filter out data that doesnt have Latitude as it is an important parameter
-df = df.filter(!($"Latitude"===""))
-
-//we filter out data that doesnt have Longitude as it is an important parameter
-df = df.filter(!($"Longitude"===""))
-
-
-//we filter out data that doesnt have location description as it is an important parameter
+1. //we ignore out data that doesnt have X Coordinate as it is an important parameter as 
+2. //we ignore out data that doesnt have Y Coordinate as it is an important parameter
+3. //Gather block mapping and used google maps to get the longitude and latitude  we need
+4. //we filter out data that doesnt have Longitude and latitude as it is an important parameter
+5.//we filter out data that doesnt have location description as it is an important parameter
 df.filter(!($"Location Description"===""))
-
-//Todo get its latitude and longitude and get the community area
-//we filter out data that doesnt Community Area as it is an important parameter 
-df = df.filter(!($"Community Area"===""))
+6.//we get its latitude and longitude and get the community area using square euclidian distance
