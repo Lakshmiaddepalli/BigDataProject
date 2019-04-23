@@ -22,3 +22,6 @@ CommunityWisePovertyRateandArrestsNotMade.collect().foreach(println)
 
 
 //Austin already was high on criminal activity but we could see that the poverty line was also above threshold
+
+
+//Validation:
