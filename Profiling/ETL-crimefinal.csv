@@ -1,0 +1,45 @@
+var df_crimes = df
+df_crimes = df_crimes.drop("District")
+df_crimes = df_crimes.drop("Ward")
+df_crimes = df_crimes.drop("FBI Code")
+df_crimes = df_crimes.drop("X Coordinate")
+df_crimes = df_crimes.drop("Y Coordinate")
+df_crimes = df_crimes.drop("Updated On")
+df_crimes = df_crimes.drop("Location")
+df_crimes = df_crimes.drop("Domestic")
+df_crimes = df_crimes.drop("Beat")
+
+
+
+//df_crimes.printSchema()
+
+root
+
+ |-- ID: string (nullable = true)
+ 
+ |-- Case Number: string (nullable = true)
+ 
+ |-- Block: string (nullable = true)
+ 
+ |-- IUCR: string (nullable = true)
+ 
+ |-- Primary Type: string (nullable = true)
+ 
+ |-- Description: string (nullable = true)
+ 
+ |-- Location Description: string (nullable = true)
+ 
+ |-- Arrest: string (nullable = true)
+ 
+ |-- Community Area: string (nullable = true)
+ 
+ |-- Year: string (nullable = true)
+ 
+ |-- Latitude: string (nullable = true)
+ 
+ |-- Longitude: string (nullable = true)
+ 
+ |-- Date_of_Crime: date (nullable = true)
+ 
+ |-- Time: string (nullable = true)
+ 
