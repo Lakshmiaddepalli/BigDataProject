@@ -1,4 +1,4 @@
-scp crimesfinal.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
+scp crimefinal.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
 scp Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
 scp SexOffendersfinal.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
 scp Chicago_Police_Department_-_Illinois_Uniform_Crime_Reporting__IUCR__Codes.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
@@ -9,7 +9,7 @@ scp block_communityareamapping.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
 scp block_geocoding_mapping.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
 
 
-hdfs dfs -put crimesfinal.csv  hdfs:///user/sla410/crimedatabigdataproject/
+hdfs dfs -put crimefinal.csv  hdfs:///user/sla410/crimedatabigdataproject/
 hdfs dfs -put Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012.csv hdfs:///user/sla410/crimedatabigdataproject/
 hdfs dfs -put SexOffendersfinal.csv   hdfs:///user/sla410/crimedatabigdataproject/
 hdfs dfs -put Chicago_Police_Department_-_Illinois_Uniform_Crime_Reporting__IUCR__Codes.csv hdfs:///user/sla410/crimedatabigdataproject/
