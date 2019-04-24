@@ -1,7 +1,7 @@
 spark-shell --packages com.databricks:spark-csv_2.10:1.5.0
 import org.apache.spark.sql.SQLContext
 val sqlContext = new org.apache.spark.sql.SQLContext(sc)
-var df = sqlContext.read.format("csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/crimesfinal.csv")
+var df = sqlContext.read.format("csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/crimefinal.csv")
 df = df.withColumn("Date_of_Crime", split($"Date", " ")(0))
 df = df.withColumn("Time", split($"Date", " ")(1))
 df = df.drop("Date")
@@ -49,8 +49,8 @@ df.filter(df("X Coordinate").isNull || df("X Coordinate") === "" || df("X Coordi
 df.filter(df("Y Coordinate").isNull || df("Y Coordinate") === "" || df("Y Coordinate").isNaN).count() //850
 df.filter(df("Year").isNull || df("Year") === "" || df("Year").isNaN).count()   //0
 df.filter(df("Updated On").isNull || df("Updated On") === "" || df("Updated On").isNaN).count() //0
-df.filter(df("Latitude").isNull || df("Latitude") === "" || df("Latitude").isNaN).count() //850
-df.filter(df("Longitude").isNull || df("Longitude") === "" || df("Longitude").isNaN).count() //850
+df.filter(df("Latitude").isNull || df("Latitude") === "" || df("Latitude").isNaN).count() //0
+df.filter(df("Longitude").isNull || df("Longitude") === "" || df("Longitude").isNaN).count() //0
 df.filter(df("Location").isNull || df("Location") === "" || df("Location").isNaN).count() //850
 //df.filter(df("Date_of_Crime").isNull || df("Date_of_Crime") === "" || df("Date_of_Crime").isNaN).count() //0
 df.filter(df("Time").isNull || df("Time") === "" || df("Time").isNaN).count() //0
