@@ -1,0 +1,50 @@
+df3 = df3.withColumnRenamed("PER CAPITA INCOME ", "PER_CAPITA_INCOME")
+
+import org.apache.spark.sql.functions._
+var percapitaincomethreshold = df3.select(avg($"PER_CAPITA_INCOME")).show()
++----------------------+                                                        
+|avg(PER_CAPITA_INCOME)|
++----------------------+
+|    25372.622888069043|
++----------------------+
+
+var percentage16unemployed = df3.select(avg($"PERCENT AGED 16+ UNEMPLOYED")).show()
+
++--------------------------------+                                              
+|avg(PERCENT AGED 16+ UNEMPLOYED)|
++--------------------------------+
+|                16.9496342551038|
++--------------------------------+
+
+var CommunityWisePrimaryCrimeIncomeandUnemployment = df3.groupBy($"Community Area",$"Primary Type",$"PER_CAPITA_INCOME",$"PERCENT AGED 16+ UNEMPLOYED").count().orderBy(desc("count"))
+
+CommunityWisePrimaryCrimeIncomeandUnemployment.where($"PER_CAPITA_INCOME" < 25372.622888069043).where($"PERCENT AGED 16+ UNEMPLOYED"> 16.9496342551038).show()
+
+
++--------------+---------------+-----------------+---------------------------+-----+
+|Community Area|   Primary Type|PER_CAPITA_INCOME|PERCENT AGED 16+ UNEMPLOYED|count|
++--------------+---------------+-----------------+---------------------------+-----+
+|            25|      NARCOTICS|            15957|                       22.6|11723| ---> Austin
+|            25|        BATTERY|            15957|                       22.6| 8410|
+|            25|          THEFT|            15957|                       22.6| 6216|
+|            23|      NARCOTICS|            13781|                       17.3| 5163|
+|            43|        BATTERY|            19398|                         20| 5062|
+|            67|        BATTERY|            11317|                       35.9| 4723|
+|            23|        BATTERY|            13781|                       17.3| 4609|
+|            29|      NARCOTICS|            12034|                       21.2| 4571|
+|            29|        BATTERY|            12034|                       21.2| 4539|
+|            68|        BATTERY|            11888|                         28| 4415|
+|            49|        BATTERY|            17949|                       20.3| 4186|
+|            71|        BATTERY|            15528|                       28.3| 4057|
+|            69|        BATTERY|            17285|                         23| 3946|
+|            25|CRIMINAL DAMAGE|            15957|                       22.6| 3826|
+|            43|          THEFT|            19398|                         20| 3818|
+|            66|        BATTERY|            13231|                       17.1| 3650|
+|            26|      NARCOTICS|            10934|                       25.8| 3303|
+|            67|          THEFT|            11317|                       35.9| 3252|
+|            67|      NARCOTICS|            11317|                       35.9| 3117|
+|            61|        BATTERY|            12765|                         23| 3116|
++--------------+---------------+-----------------+---------------------------+-----+
+
+The 3 types of Primary Area for PERCENT AGED 16+ UNEMPLOYED greater than percentage16unemployed and PER_CAPITA_INCOME < percapitaincomethreshold are "Narcotics, Battery, and Theft" and
+ it happens in Austin where the PER_CAPITA_INCOME  =15957 and PERCENT AGED 16+ UNEMPLOYED = 22.6.  Here crimes reported were more.
