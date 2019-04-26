@@ -42,3 +42,4 @@ root
  
  //Not Working as date is not being filtered
  var CommunityWiseNumberofVacantBuildings = df5.groupBy($"Community Area",$"IS THE BUILDING CURRENTLY VACANT OR OCCUPIED?").count().orderBy(desc("count"))
+CommunityWiseNumberofVacantBuildings.where($"IS THE BUILDING CURRENTLY VACANT OR OCCUPIED?" == "VACANT").show()
