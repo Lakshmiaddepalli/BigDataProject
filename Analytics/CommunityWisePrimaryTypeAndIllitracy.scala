@@ -31,4 +31,4 @@ Community Area|   Primary Type|PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA|coun
 
 
 The 3 types of Primary Area for People aged 25+ without high scool diploma are "Narcotics, Battery, and Theft" and the highest place of
-crimes occured in Austin.
+crimes occured in Austin where the percentage of illitracy was above  the threshold 20.33.
