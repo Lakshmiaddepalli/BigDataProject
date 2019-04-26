@@ -32,7 +32,7 @@ df4 = df4.withColumn("DateServiceRequest", todate($"DATE SERVICE REQUEST WAS REC
 df4 = df4.withColumn("DateServiceRequest", (col("DateServiceRequest").cast("date")))
 df4 = df4.drop("DATE SERVICE REQUEST WAS RECEIVED")
 df4 = df4.filter($"DateServiceRequest".between("2015-07-05", "2015-09-02"))
-val filteredData = df4.select(df4("SERVICE REQUEST TYPE"), date_format(df4("DATE SERVICE REQUEST WAS RECEIVED"), "yyyy-MM-dd").alias("date")).filter($"date".between("2010-01-01", "2011-12-31"))
+val filteredData = df4.select(df4("SERVICE REQUEST TYPE"), date_format(df4("DateServiceRequest"), "yyyy-MM-dd").alias("date")).filter($"date".between("2010-01-01", "2011-12-31"))
 
 
 df4.filter(df4("SERVICE REQUEST TYPE").isNull || df4("SERVICE REQUEST TYPE") === "" || df4("SERVICE REQUEST TYPE").isNaN).count() //3 filter
