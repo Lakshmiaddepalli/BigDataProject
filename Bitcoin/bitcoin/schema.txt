@@ -1,0 +1,5 @@
+root
+ |-- date: string (nullable = true) // Range Expected between 15th March 2018 to 15th March 2019.
+ |-- high: string (nullable = true) // The Range has to be Positive 
+ |-- close: string (nullable = true) // The Range has to be Positive 
+ |-- low: string (nullable = true) // The Range has to be Positive 
