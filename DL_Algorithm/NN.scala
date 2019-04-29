@@ -33,7 +33,7 @@ object predictcrime {
         val sqlc = new SQLContext(sc)
 
         val crime = asDataFrame(crimedata("hdfs:///user/sla410/crimedatabigdataproject/crimefinal.csv"))
-        val health = asDataFrame(healthdata("hdfs:///user/sla410/crimedatabigdataproject/311_final1.csv"))
+        val health = asDataFrame(healthdata("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv"))
         val socioeconomiccensus = asDataFrame(socioeconomiccensusdata("Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012.csv"))
     
         crime.registerTempTable("crime")
