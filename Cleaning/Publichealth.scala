@@ -53,8 +53,12 @@ df3.filter(df3("Infant_Mortality_Rate").isNull || df3("Infant_Mortality_Rate") =
 df3.filter(df3("Lung_Cancer").isNull || df3("Lung_Cancer") === "" || df3("Lung_Cancer").isNaN).count()
 df3.filter(df3("Prostate_Cancer_in_Males").isNull || df3("Prostate_Cancer_in_Males") === "" || df3("Prostate_Cancer_in_Males").isNaN).count()
 df3.filter(df3("Stroke").isNull || df3("Stroke") === "" || df3("Stroke").isNaN).count()
-df3.filter(df3("Childhood_Blood_Lead_Level_Screening").isNull || df3(" Childhood_Blood_Lead_Level_Screening") === "" || df3("Childhood_Blood_Lead_Level_Screening").isNaN).count()
+df3.filter(df3("Childhood_Blood_Lead_Level_Screening").isNull || df3("Childhood_Blood_Lead_Level_Screening") === "" || df3("Childhood_Blood_Lead_Level_Screening").isNaN).count()
 df3.filter(df3("Childhood_Lead_Poisoning").isNull || df3("Childhood_Lead_Poisoning") === "" || df3("Childhood_Lead_Poisoning").isNaN).count()
 df3.filter(df3("Gonorrhea_in_Females").isNull || df3("Gonorrhea_in_Females") === "" || df3("Gonorrhea_in_Females").isNaN).count()
 df3.filter(df3("Gonorrhea_in_Males").isNull || df3("Gonorrhea_in_Males") === "" || df3("Gonorrhea_in_Males").isNaN).count()
 df3.filter(df3("Tuberculosis").isNull || df3("Tuberculosis") === "" || df3("Tuberculosis").isNaN).count()
+
+df3 = df3.withColumn("Gonorrhea_in_Females", when($"Gonorrhea_in_Females" === "", "0.0").otherwise($"Gonorrhea_in_Females"))
+df3 = df3.withColumn("Childhood_Lead_Poisoning", when($"Childhood_Lead_Poisoning" === "", "0.0").otherwise($"Childhood_Lead_Poisoning"))
+
