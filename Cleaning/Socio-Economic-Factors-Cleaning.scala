@@ -13,3 +13,5 @@ df2.filter(df2("PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA").isNull || df2("PE
 df2.filter(df2("PERCENT AGED UNDER 18 OR OVER 64").isNull || df2("PERCENT AGED UNDER 18 OR OVER 64") === "" || df2("PERCENT AGED UNDER 18 OR OVER 64").isNaN).count() 
 df2.filter(df2("PER CAPITA INCOME ").isNull || df2("PER CAPITA INCOME ") === "" || df2("PER CAPITA INCOME ").isNaN).count() //0
 df2.filter(df2("HARDSHIP INDEX").isNull || df2("HARDSHIP INDEX") === "" || df2("HARDSHIP INDEX").isNaN).count() // 1  (we will not delete it as community area the last row represents full Chicago Economic factors)
+df2.filter(!($"Community Area"===""))
+
