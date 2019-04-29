@@ -62,3 +62,4 @@ df3.filter(df3("Tuberculosis").isNull || df3("Tuberculosis") === "" || df3("Tube
 df3 = df3.withColumn("Gonorrhea_in_Females", when($"Gonorrhea_in_Females" === "", "0.0").otherwise($"Gonorrhea_in_Females"))
 df3 = df3.withColumn("Childhood_Lead_Poisoning", when($"Childhood_Lead_Poisoning" === "", "0.0").otherwise($"Childhood_Lead_Poisoning"))
 
+df3.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv")
