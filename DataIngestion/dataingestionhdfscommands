@@ -7,7 +7,7 @@ scp Food_Inspections_modified.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
 scp Affordable_Rental_Housing_Developments.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
 scp block_communityareamapping.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
 scp block_geocoding_mapping.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
-
+scp Public_Health_Statistics-_Selected_public_health_indicators_by_Chicago_community_area.csv sla410@dumbo.es.its.nyu.edu:/home/sla410/
 
 hdfs dfs -put crimefinal.csv  hdfs:///user/sla410/crimedatabigdataproject/
 hdfs dfs -put Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012.csv hdfs:///user/sla410/crimedatabigdataproject/
@@ -18,3 +18,4 @@ hdfs dfs -put Food_Inspections_modified.csv hdfs:///user/sla410/crimedatabigdata
 hdfs dfs -put Affordable_Rental_Housing_Developments.csv   hdfs:///user/sla410/crimedatabigdataproject/
 hdfs dfs -put block_communityareamapping.csv   hdfs:///user/sla410/crimedatabigdataproject/
 hdfs dfs -put block_geocoding_mapping.csv  hdfs:///user/sla410/crimedatabigdataproject/
+hdfs dfs -put Public_Health_Statistics-_Selected_public_health_indicators_by_Chicago_community_area.csv  hdfs:///user/sla410/crimedatabigdataproject/
