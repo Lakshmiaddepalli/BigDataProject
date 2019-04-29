@@ -15,3 +15,15 @@ df2.filter(df2("PER CAPITA INCOME ").isNull || df2("PER CAPITA INCOME ") === "" 
 df2.filter(df2("HARDSHIP INDEX").isNull || df2("HARDSHIP INDEX") === "" || df2("HARDSHIP INDEX").isNaN).count() // 1  (we will not delete it as community area the last row represents full Chicago Economic factors)
 df2.filter(!($"Community Area"===""))
 
+
+df2 =  df2.withColumnRenamed("Community Area", "Community_Area")
+df2 =  df2.withColumnRenamed("COMMUNITY AREA NAME", "COMMUNITY_AREA_NAME")
+df2 =  df2.withColumnRenamed("PERCENT OF HOUSING CROWDED", "PERCENT_OF_HOUSING_CROWDED")
+df2 =  df2.withColumnRenamed("PERCENT AGED 16+ UNEMPLOYED", "PERCENT_AGED_16+_UNEMPLOYED")
+df2 =  df2.withColumnRenamed("PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA", "PERCENT_AGED 25+_WITHOUT_HIGH_SCHOOL_DIPLOMA")
+df2 =  df2.withColumnRenamed("PERCENT AGED UNDER 18 OR OVER 64", "PERCENT AGED UNDER 18 OR OVER 64")
+df2 =  df2.withColumnRenamed("PER CAPITA INCOME ", "PER_CAPITA_INCOME")
+df2 =  df2.withColumnRenamed("HARDSHIP INDEX", "HARDSHIP_INDEX")
+
+
+
