@@ -2,7 +2,6 @@ spark-shell --packages com.databricks:spark-csv_2.10:1.5.0
 import org.apache.spark.sql.SQLContext
 val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 var df3 = sqlContext.read.format("csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/Public_Health_Statistics-_Selected_public_health_indicators_by_Chicago_community_area.csv")
-Below Poverty Level	Crowded Housing	Dependency	No High School Diploma	Per Capita Income	Unemployment
 
 df3.printSchema()
 
@@ -29,16 +28,33 @@ df3 =  df3.withColumnRenamed("Childhood Lead Poisoning", "Childhood_Lead_Poisoni
 df3 =  df3.withColumnRenamed("Gonorrhea in Females", "Gonorrhea_in_Females")
 df3 =  df3.withColumnRenamed("Gonorrhea in Males", "Gonorrhea_in_Males")
 
+df3 = df3.drop("Below Poverty Level")
+df3 = df3.drop("Crowded Housing")
+df3 = df3.drop("Dependency")
+df3 = df3.drop("No High School Diploma")
+df3 = df3.drop("Per Capita Income")
+df3 = df3.drop("Unemployment")
 
-df3.filter(df3("Community Area").isNull || df3("Community Area") === "" || df3("Community Area").isNaN).count()
-
-
-df2 =  df2.withColumnRenamed("Community Area", "Community_Area")
-df2 =  df2.withColumnRenamed("COMMUNITY AREA NAME", "COMMUNITY_AREA_NAME")
-df2 =  df2.withColumnRenamed("PERCENT OF HOUSING CROWDED", "PERCENT_OF_HOUSING_CROWDED")
-df2 =  df2.withColumnRenamed("PERCENT AGED 16+ UNEMPLOYED", "PERCENT_AGED_16+_UNEMPLOYED")
-df2 =  df2.withColumnRenamed("PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA", "PERCENT_AGED 25+_WITHOUT_HIGH_SCHOOL_DIPLOMA")
-df2 =  df2.withColumnRenamed("PERCENT HOUSEHOLDS BELOW POVERTY", "PERCENT_HOUSEHOLDS_BELOW_POVERTY")
-df2 =  df2.withColumnRenamed("PERCENT AGED UNDER 18 OR OVER 64", "PERCENT_AGED_UNDER_18_OR_OVER_64")
-df2 =  df2.withColumnRenamed("PER CAPITA INCOME ", "PER_CAPITA_INCOME")
-df2 =  df2.withColumnRenamed("HARDSHIP INDEX", "HARDSHIP_INDEX")
+df3.filter(df3("Community_Area").isNull || df3("Community_Area") === "" || df3("Community_Area").isNaN).count()
+df3.filter(df3("Community_Area_Name").isNull || df3("Community_Area_Name") === "" || df3("Community_Area_Name").isNaN).count()
+df3.filter(df3("Birth_Rate").isNull || df3("Birth_Rate") === "" || df3("Birth_Rate").isNaN).count()
+df3.filter(df3("General_Fertility_Rate").isNull || df3("General_Fertility_Rate") === "" || df3("General_Fertility_Rate").isNaN).count()
+df3.filter(df3("Low_Birth_Weight").isNull || df3("Low_Birth_Weight") === "" || df3("Low_Birth_Weight").isNaN).count()
+df3.filter(df3("Prenatal_Care_Beginning_in_First_Trimester").isNull || df3("Prenatal_Care_Beginning_in_First_Trimester") === "" || df3("Prenatal_Care_Beginning_in_First_Trimester").isNaN).count()
+df3.filter(df3("Preterm_Births").isNull || df3("Preterm_Births") === "" || df3("Preterm_Births").isNaN).count()
+df3.filter(df3("Teen_Birth_Rate").isNull || df3("Teen_Birth_Rate") === "" || df3("Teen_Birth_Rate").isNaN).count()
+df3.filter(df3("Assault").isNull || df3("Assault") === "" || df3("Assault").isNaN).count()
+df3.filter(df3("Breast_cancer_in_females").isNull || df3("Breast_cancer_in_females") === "" || df3("Breast_cancer_in_females").isNaN).count()
+df3.filter(df3("Cancer").isNull || df3("Cancer") === "" || df3("Cancer").isNaN).count()
+df3.filter(df3("Colorectal_Cancer").isNull || df3("Colorectal_Cancer") === "" || df3("Colorectal_Cancer").isNaN).count()
+df3.filter(df3("Diabetes_related").isNull || df3("Diabetes_related") === "" || df3("Diabetes_related").isNaN).count()
+df3.filter(df3("Firearm_related").isNull || df3("Firearm_related") === "" || df3("Firearm_related").isNaN).count()
+df3.filter(df3("Infant_Mortality_Rate").isNull || df3("Infant_Mortality_Rate") === "" || df3("Infant_Mortality_Rate").isNaN).count()
+df3.filter(df3("Lung_Cancer").isNull || df3("Lung_Cancer") === "" || df3("Lung_Cancer").isNaN).count()
+df3.filter(df3("Prostate_Cancer_in_Males").isNull || df3("Prostate_Cancer_in_Males") === "" || df3("Prostate_Cancer_in_Males").isNaN).count()
+df3.filter(df3("Stroke").isNull || df3("Stroke") === "" || df3("Stroke").isNaN).count()
+df3.filter(df3("Childhood_Blood_Lead_Level_Screening").isNull || df3(" Childhood_Blood_Lead_Level_Screening") === "" || df3("Childhood_Blood_Lead_Level_Screening").isNaN).count()
+df3.filter(df3("Childhood_Lead_Poisoning").isNull || df3("Childhood_Lead_Poisoning") === "" || df3("Childhood_Lead_Poisoning").isNaN).count()
+df3.filter(df3("Gonorrhea_in_Females").isNull || df3("Gonorrhea_in_Females") === "" || df3("Gonorrhea_in_Females").isNaN).count()
+df3.filter(df3("Gonorrhea_in_Males").isNull || df3("Gonorrhea_in_Males") === "" || df3("Gonorrhea_in_Males").isNaN).count()
+df3.filter(df3("Tuberculosis").isNull || df3("Tuberculosis") === "" || df3("Tuberculosis").isNaN).count()
