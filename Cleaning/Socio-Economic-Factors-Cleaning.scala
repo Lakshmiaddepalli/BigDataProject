@@ -27,3 +27,4 @@ df2 =  df2.withColumnRenamed("HARDSHIP INDEX", "HARDSHIP_INDEX")
 
 
 
+df2.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors.csv")
