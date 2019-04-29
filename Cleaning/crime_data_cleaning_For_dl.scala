@@ -1,12 +1,6 @@
-var input = "06/23/2005 07:50:00 PM";
-var inputFormat = new SimpleDateFormat("MM/dd/yyyy KK:mm:ss a");
-var outputFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-outputFormat.format(inputFormat.parse(input));
-input.split(" ",1)
-var value = split($"Date", " ")(0)
-df = df.withColumn("Year", split(,"/")(2))
-
-
+spark-shell --packages com.databricks:spark-csv_2.10:1.5.0
+import org.apache.spark.sql.SQLContext
+val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 
 
 spark-shell --packages com.databricks:spark-csv_2.10:1.5.0
