@@ -24,7 +24,7 @@ dfcrime.registerTempTable("crime")
 dfhealth.registerTempTable("health")
 dfsocioeconomiccensus.registerTempTable("socioeconomiccensus")
 
-val crimefactors = sqlc.sql("""SELECT
+var crimefactors = sqlc.sql("""SELECT
         crime.Year,crime.Month,crime.Day,crime.Time,
         crime.IUCR, crime.Primary_Type,crime.Description,crime.Location_Description,
         crime.Community_Area, crime.Arrest,crime.FBI_Code,crime.Latitude,crime.Longitude,
