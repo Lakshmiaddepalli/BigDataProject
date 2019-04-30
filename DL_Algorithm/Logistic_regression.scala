@@ -90,3 +90,13 @@ val pipeline = new Pipeline().setStages(Array(timeInd, iucrInd, primarytypeInd,d
 val splits = valcrime.randomSplit(Array(0.8, 0.2), seed = 11L)
 val train = splits(0).cache()
 val test = splits(1).cache()
+
+var model = pipeline.fit(train)
+var result = model.transform(test)
+result = result.select("prediction","Arrest")
+val predictionAndLabels = result.map { row =>
+ (row.get(0).asInstanceOf[Double],row.get(1).asInstanceOf[Double])
+}
+val metrics = new BinaryClassificationMetrics(predictionAndLabels)
+println("Area under ROC = " + metrics.areaUnderROC())
+model = pipeline.fit(train_data)
