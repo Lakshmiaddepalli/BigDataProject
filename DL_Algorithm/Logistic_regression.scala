@@ -55,7 +55,7 @@ var crimefactors = sqlc.sql("""SELECT
         ON crime.Community_Area = health.Community_Area""".stripMargin)
 
 
-
+var valcrime = crimefactors.na.drop()
 val toDouble = sqlContext.udf.register("toDouble", ((n: Int) => { n.toDouble }))
 
 val arrestencode = sqlContext.udf.register("arrestencode", (Arrest: Boolean) => {
@@ -65,13 +65,13 @@ val arrestencode = sqlContext.udf.register("arrestencode", (Arrest: Boolean) => 
         0.0
     })
 
-crimefactors = crimefactors.withColumn("Arrest", arrestencode(crimefactors("Arrest")))
-crimefactors = crimefactors.withColumn("Year", toDouble(crimefactors("Year")))
-crimefactors = crimefactors.withColumn("Month", toDouble(crimefactors("Month")))
-crimefactors = crimefactors.withColumn("Day", toDouble(crimefactors("Day")))
-crimefactors = crimefactors.withColumn("Community_Area", toDouble(crimefactors("Community_Area")))
-crimefactors = crimefactors.withColumn("PER_CAPITA_INCOME", toDouble(crimefactors("PER_CAPITA_INCOME")))
-crimefactors = crimefactors.withColumn("HARDSHIP_INDEX", toDouble(crimefactors("HARDSHIP_INDEX")))
+valcrime = valcrime.withColumn("Arrest", arrestencode(valcrime("Arrest")))
+valcrime = valcrime.withColumn("Year", toDouble(valcrime("Year")))
+valcrime = valcrime.withColumn("Month", toDouble(valcrime("Month")))
+valcrime = valcrime.withColumn("Day", toDouble(valcrime("Day")))
+valcrime = valcrime.withColumn("Community_Area", toDouble(valcrime("Community_Area")))
+valcrime = valcrime.withColumn("PER_CAPITA_INCOME", toDouble(valcrime("PER_CAPITA_INCOME")))
+valcrime = valcrime.withColumn("HARDSHIP_INDEX", toDouble(valcrime("HARDSHIP_INDEX")))
 
 val timeInd = new StringIndexer().setInputCol("Time").setOutputCol("TimeIndex")
 val iucrInd = new StringIndexer().setInputCol("IUCR").setOutputCol("IUCRIndex")
@@ -81,5 +81,12 @@ val locationdescriptionInd = new StringIndexer().setInputCol("Location_Descripti
 val fbicodeInd = new StringIndexer().setInputCol("FBI_Code").setOutputCol("FBICodeIndex")
 val gnmalesInd = new StringIndexer().setInputCol("Gonorrhea_in_Males").setOutputCol("GonorrheainMalesIndex")
 
-val assembler = new VectorAssembler().setInputCols(Array("Year", "Month", "Day", "IUCR", "Primary_Type","Description","Location_Description","Community_Area","FBI_Code","Latitude","Longitude","PERCENT_OF_HOUSING_CROWDED","PERCENT_HOUSEHOLDS_BELOW_POVERTY","PERCENT_AGED_16_UNEMPLOYED","PERCENT_AGED_25_WITHOUT_HIGH_SCHOOL_DIPLOMA","PERCENT_AGED_UNDER_18_OR_OVER_64","PER_CAPITA_INCOME","HARDSHIP_INDEX","Birth_Rate","General_Fertility_Rate","Low_Birth_Weight","Prenatal_Care_Beginning_in_First_Trimester","Preterm_Births","Teen_Birth_Rate","Assault","Breast_cancer_in_females","Cancer","Colorectal_Cancer","Diabetes_related","Firearm_related","Infant_Mortality_Rate","Lung_Cancer","Prostate_Cancer_in_Males","Stroke","Childhood_Blood_Lead_Level_Screening","Childhood_Lead_Poisoning","Gonorrhea_in_Females","Gonorrhea_in_Males","Tuberculosis")).setOutputCol("features_temp")
+val assembler = new VectorAssembler().setInputCols(Array("Year", "Month", "Day", "TimeIndex","IUCRIndex", "PrimaryTypeIndex","DescriptionIndex","LocationDescriptionIndex","Community_Area","FBICodeIndex","Latitude","Longitude","PERCENT_OF_HOUSING_CROWDED","PERCENT_HOUSEHOLDS_BELOW_POVERTY","PERCENT_AGED_16_UNEMPLOYED","PERCENT_AGED_25_WITHOUT_HIGH_SCHOOL_DIPLOMA","PERCENT_AGED_UNDER_18_OR_OVER_64","PER_CAPITA_INCOME","HARDSHIP_INDEX","Birth_Rate","General_Fertility_Rate","Low_Birth_Weight","Prenatal_Care_Beginning_in_First_Trimester","Preterm_Births","Teen_Birth_Rate","Assault","Breast_cancer_in_females","Cancer","Colorectal_Cancer","Diabetes_related","Firearm_related","Infant_Mortality_Rate","Lung_Cancer","Prostate_Cancer_in_Males","Stroke","Childhood_Blood_Lead_Level_Screening","Childhood_Lead_Poisoning","Gonorrhea_in_Females","GonorrheainMalesIndex","Tuberculosis")).setOutputCol("features_temp")
+val normalizer = new Normalizer().setInputCol("features_temp").setOutputCol("features").setP(1.0)
+val lr = new LogisticRegression().setMaxIter(10)
+lr.setLabelCol("Arrest")
 
+val pipeline = new Pipeline().setStages(Array(timeInd, iucrInd, primarytypeInd,descriptionInd,locationdescriptionInd,fbicodeInd,gnmalesInd, assembler, normalizer,lr))
+val splits = valcrime.randomSplit(Array(0.8, 0.2), seed = 11L)
+val train = splits(0).cache()
+val test = splits(1).cache()
