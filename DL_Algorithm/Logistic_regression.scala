@@ -53,3 +53,31 @@ val crimefactors = sqlc.sql("""SELECT
         ON crime.Community_Area = socioeconomiccensus.Community_Area
         JOIN health
         ON crime.Community_Area = health.Community_Area""".stripMargin)
+
+
+
+val toDouble = sqlContext.udf.register("toDouble", ((n: Int) => { n.toDouble }))
+
+val arrestencode = sqlContext.udf.register("arrestencode", (Arrest: boolean) => {
+      if (Arrest)
+        1.0
+      else
+        0.0
+    })
+
+crimefactors = crimefactors.withColumn("Arrest", arrestencode(crimefactors("Arrest")))
+crimefactors = crimefactors.withColumn("Year", toDouble(crimefactors("Year")))
+crimefactors = crimefactors.withColumn("Month", toDouble(crimefactors("Month")))
+crimefactors = crimefactors.withColumn("Day", toDouble(crimefactors("Day")))
+crimefactors = crimefactors.withColumn("Community_Area", toDouble(crimefactors("Community_Area")))
+crimefactors = crimefactors.withColumn("PER_CAPITA_INCOME", toDouble(crimefactors("PER_CAPITA_INCOME")))
+crimefactors = crimefactors.withColumn("HARDSHIP_INDEX", toDouble(crimefactors("HARDSHIP_INDEX")))
+
+val timeInd = new StringIndexer().setInputCol("Time").setOutputCol("TimeIndex")
+val iucrInd = new StringIndexer().setInputCol("IUCR").setOutputCol("IUCRIndex")
+val primarytypeInd = new StringIndexer().setInputCol("Primary_Type").setOutputCol("PrimaryTypeIndex")
+val descriptionInd = new StringIndexer().setInputCol("Description").setOutputCol("DescriptionIndex")
+val locationdescriptionInd = new StringIndexer().setInputCol("Location_Description").setOutputCol("LocationDescriptionIndex")
+val fbicodeInd = new StringIndexer().setInputCol("FBI_Code").setOutputCol("FBICodeIndex")
+val gnmalesInd = new StringIndexer().setInputCol("Gonorrhea_in_Males").setOutputCol("GonorrheainMalesIndex")
+
