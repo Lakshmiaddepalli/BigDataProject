@@ -44,7 +44,7 @@ object predictcrime {
         var dfhealth = sqlc.read.format("com.databricks.spark.csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv")
        
         // var socioeconomiccensus = asDataFrame(socioeconomiccensusdata("socioeconomicfactors1.csv"))
-        var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors.csv")
+        var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors2.csv")
     
         dfcrime.registerTempTable("crime")
         dfhealth.registerTempTable("health")
