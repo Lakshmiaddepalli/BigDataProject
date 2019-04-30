@@ -17,6 +17,23 @@ import water.fvec.{Chunk, NewChunk, Vec}
 import water.parser.{BufferedString, ParseSetup}
 import water.support.{H2OFrameSupport, ModelMetricsSupport, SparkContextSupport, SparklingWaterApp}
 
+
+
+object Crime {
+  def apply(Year:Short, Month:Byte, Day:Byte,Time: Byte,
+            IUCR: Short,Primary_Type: String,Description: String, 
+            Location_Description: String,Community_Area: Byte, FBI_Code: Byte,
+            Latitude: Double,Longitude: Double): Crime = {
+            Crime(Year,Month,Day,Time,
+            IUCR, Primary_Type, Description,Location_Description,
+            Community_Area, FBI_Code,Latitude, Longitude)
+  }
+}
+
+case class Crime(Year: Short, Month: Byte, Day: Byte, Time: Byte, IUCR: Short,
+                 Primary_Type: String,Description: String, Location_Description: String,
+                 Community_Area: Byte, FBI_Code: Byte, Latitude: Double, Longitude: Double)
+
 object predictcrime {
 
 
@@ -48,7 +65,7 @@ object predictcrime {
     
         dfcrime.registerTempTable("crime")
         dfhealth.registerTempTable("health")
-        dfsocioeconomiccensus.registerTempTable("socioeconomic")
+        dfsocioeconomiccensus.registerTempTable("socioeconomiccensus")
 
       //  sqlc.sql("SELECT * FROM crime").show(5)
      //   sqlc.sql("SELECT * FROM health").show(5)
@@ -57,7 +74,7 @@ object predictcrime {
         val crimefactors = sqlc.sql("""SELECT
         crime.Year,crime.Month,crime.Day,crime.Time,
         crime.IUCR, crime.Primary_Type,crime.Description,crime.Location_Description,
-        crime.Community_Area, crime.Arrest,crime.FBI_Code,crime.Latitude,crime.Longitude
+        crime.Community_Area, crime.Arrest,crime.FBI_Code,crime.Latitude,crime.Longitude,
         socioeconomiccensus.PERCENT_OF_HOUSING_CROWDED, 
         socioeconomiccensus.PERCENT_HOUSEHOLDS_BELOW_POVERTY,
         socioeconomiccensus.PERCENT_AGED_16+__UNEMPLOYED, 
@@ -86,11 +103,45 @@ object predictcrime {
 
         val crimeFactorsdataframe:H2OFrame = crimefactors
         H2OFrameSupport.allStringVecToCategorical(crimeFactorsdataframe)
+        
+        
+               def nnModel(train: H2OFrame, test: H2OFrame, colval: String) (implicit hc: H2OContext) : DeepLearningModel = {
+       import hc.implicits._
+       import _root_.hex.deeplearning.DeepLearning
+       val dlval = new DeepLearningParameters()
+       dlval._train = train
+       dlval._valid = test
+       dlval._response_column = colval
+       dlval._epochs = 100
+       dlval._l1 = 0.0001
+       dlval._l2 = 0.0001
+       dlval._activation = Activation.RectifierWithDropout
+       dlval._hidden = Array(10,10)
+       val nn = new DeepLearning(dlval)
+       val nnmodel = nn.trainModel.get
+       nnmodel
+        }
+
+      
+      def scorevalue(crime: Crime, socioeconomiccensusdata: DataFrame, healthdata:DataFrame, nnmodel: Model[_,_,_])
+      (implicit sqlc: SQLContext, hc: H2OContext): Float = {
+      import hc.implicits._
+      import sqlc.implicits._
+      val crimetestdata = sqlc.sparkContext.parallelize(Seq(crime)).toDF
+      val joinedhealthdata = healthdata.join(crimetestdata).where('Community_Area === 'Community_Area)
+      val joinedsocioeconomichealth = socioeconomiccensusdata.join(joinedhealthdata).where('Community_Area === 'Community_Area)
+      H2OFrameSupport.allStringVecToCategorical(joinedsocioeconomichealth)
+      val chanceofarrest = nnmodel.score(joinedsocioeconomichealth).vec("true").at(0)
+      chanceofarrest.toFloat 
+  
+    }
+
+        
         val keyfiles = Array[String]("train.hex", "test.hex")
         val splitratio = Array[Double](0.8)
         val files = H2OFrameSupport.split(crimeFactorsdataframe, keyfiles, splitratio)
         val (trainset, testset) = (files(0), files(1))
-        val nnModel = DLModel(trainset, testset, 'Arrest)
+        val nnModeldl = nnModel(trainset, testset, 'Arrest)(hc)
        // val (trainMetricvalues, testMetricsvalues) = binomialMetrics(nnModel, trainset, testset)
 
        // println(s"""Model performance:DL:train AUC = ${trainMetricvalues.auc} test  AUC = ${testMetricsvalues.auc}""".stripMargin)
@@ -112,36 +163,6 @@ object predictcrime {
        
        
        
-       def nnModel(train: H2OFrame, test: H2OFrame, colval: String) (implicit hc: H2OContext) : DeepLearningModel = {
-       import hc.implicits._
-       import hex.deeplearning.DeepLearning
-       val dlval = new DeepLearningParameters()
-       dlval._train = train
-       dlval._valid = test
-       dlval._response_column = colval
-       dlval._epochs = 100
-       dlval._l1 = 0.0001
-       dlval._l2 = 0.0001
-       dlval._activation = Activation.RectifierWithDropout
-       dlval._hidden = Array(200,200)
-       val nn = new DeepLearning(dlval)
-       val nnmodel = nn.trainModel.get
-       nnmodel
-        }
-
-      
-      def scorevalue(crime: Crime, socioeconomiccensusdata: DataFrame, healthdata:DataFrame, nnmodel: Model[_,_,_])
-      (implicit sqlc: SQLContext, hc: H2OContext): Float = {
-      import hc.implicits._
-      import sqlc.implicits._
-      val crimetestdata = sqlc.sparkContext.parallelize(Seq(crime)).toDF
-      val joinedhealthdata = healthdata.join(crimetestdata).where('Community_Area === 'Community_Area)
-      val joinedsocioeconomichealth = socioeconomiccensusdata.join(joinedhealthdata).where('Community_Area === 'Community_Area)
-      H2OFrameSupport.allStringVecToCategorical(joinedsocioeconomichealth)
-      val chanceofarrest = nnmodel.score(joinedsocioeconomichealth).vec("true").at(0)
-      chanceofarrest.toFloat 
-  
-    }
 
    /* def load(dataset: String, modifyParserSetup: ParseSetup => ParseSetup = identity[ParseSetup]): H2OFrame = {
       val uri = java.net.URI.create(dataset)
@@ -165,18 +186,3 @@ object predictcrime {
   }*/
 }
 
-
-object Crime {
-  def apply(Year:Short, Month:Byte, Day:Byte,Time: Byte,
-            IUCR: Short,Primary_Type: String,Description: String, 
-            Location_Description: String,Community_Area: Byte, FBI_Code: Byte,
-            Latitude: Double,Longitude: Double): Crime = {
-            Crime(Year,Month,Day,Time,
-            IUCR, Primary_Type, Description,Location_Description,
-            Community_Area, FBI_Code,Latitude, Longitude)
-  }
-}
-
-case class Crime(Year: Short, Month: Byte, Day: Byte, Time: Byte, IUCR: Short,
-                 Primary_Type: String,Description: String, Location_Description: String,
-                 Community_Area: Byte, FBI_Code: Byte, Latitude: Double, Longitude: Double)
