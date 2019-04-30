@@ -2,7 +2,7 @@ spark-shell --packages com.databricks:spark-csv_2.10:1.5.0
 val sqlc = new SQLContext(sc)
 var dfcrime = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/crimedl1.csv").cache()
 var dfhealth = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv").cache()
-var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors2.csv").cache()
+var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors3.csv").cache()
 
 dfcrime.registerTempTable("crime")
 dfhealth.registerTempTable("health")
@@ -14,8 +14,8 @@ val crimefactors = sqlc.sql("""SELECT
         crime.Community_Area, crime.Arrest,crime.FBI_Code,crime.Latitude,crime.Longitude,
         socioeconomiccensus.PERCENT_OF_HOUSING_CROWDED, 
         socioeconomiccensus.PERCENT_HOUSEHOLDS_BELOW_POVERTY,
-        socioeconomiccensus.PERCENT_AGED_16+__UNEMPLOYED, 
-        socioeconomiccensus.PERCENT_AGED_25+__WITHOUT_HIGH_SCHOOL_DIPLOMA,
+        socioeconomiccensus.PERCENT_AGED_16__UNEMPLOYED, 
+        socioeconomiccensus.PERCENT_AGED_25__WITHOUT_HIGH_SCHOOL_DIPLOMA,
         socioeconomiccensus.PERCENT_AGED_UNDER_18_OR_OVER_64,
         socioeconomiccensus.PER_CAPITA_INCOME, 
         socioeconomiccensus.HARDSHIP_INDEX,
