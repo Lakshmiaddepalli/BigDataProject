@@ -19,8 +19,8 @@ df2.filter(!($"Community Area"===""))
 df2 =  df2.withColumnRenamed("Community Area", "Community_Area")
 df2 =  df2.withColumnRenamed("COMMUNITY AREA NAME", "COMMUNITY_AREA_NAME")
 df2 =  df2.withColumnRenamed("PERCENT OF HOUSING CROWDED", "PERCENT_OF_HOUSING_CROWDED")
-df2 =  df2.withColumnRenamed("PERCENT AGED 16+ UNEMPLOYED", "PERCENT_AGED_16+_UNEMPLOYED")
-df2 =  df2.withColumnRenamed("PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA", "PERCENT_AGED_25+_WITHOUT_HIGH_SCHOOL_DIPLOMA")
+df2 =  df2.withColumnRenamed("PERCENT AGED 16+ UNEMPLOYED", "PERCENT_AGED_16_UNEMPLOYED")
+df2 =  df2.withColumnRenamed("PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA", "PERCENT_AGED_25_WITHOUT_HIGH_SCHOOL_DIPLOMA")
 df2 =  df2.withColumnRenamed("PERCENT HOUSEHOLDS BELOW POVERTY", "PERCENT_HOUSEHOLDS_BELOW_POVERTY")
 df2 =  df2.withColumnRenamed("PERCENT AGED UNDER 18 OR OVER 64", "PERCENT_AGED_UNDER_18_OR_OVER_64")
 df2 =  df2.withColumnRenamed("PER CAPITA INCOME ", "PER_CAPITA_INCOME")
@@ -28,4 +28,4 @@ df2 =  df2.withColumnRenamed("HARDSHIP INDEX", "HARDSHIP_INDEX")
 
 
 
-df2.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors2.csv")
+df2.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors3.csv")
