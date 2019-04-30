@@ -152,11 +152,11 @@ object predictcrime {
 }
 
 object Crime {
-  def apply(Year:String, Month:String: Day:String,Time: String,
+  def apply(Year:Short, Month:Byte, Day:Byte,Time: Byte,
             IUCR: Short,Primary_Type: String,Description: String, 
             Location_Description: String,Community_Area: Byte, FBI_Code: Byte,
             Latitude: Double,Longitude: Double): Crime = {
-            Crime(Year.toShort,Month.toByte,Day.toByte,Time.toByte,
+            Crime(Year,Month,Day,Time,
             IUCR, Primary_Type, Description,Location_Description,
             Community_Area, FBI_Code,Latitude, Longitude)
   }
