@@ -58,7 +58,7 @@ val crimefactors = sqlc.sql("""SELECT
 
 val toDouble = sqlContext.udf.register("toDouble", ((n: Int) => { n.toDouble }))
 
-val arrestencode = sqlContext.udf.register("arrestencode", (Arrest: boolean) => {
+val arrestencode = sqlContext.udf.register("arrestencode", (Arrest: Boolean) => {
       if (Arrest)
         1.0
       else
