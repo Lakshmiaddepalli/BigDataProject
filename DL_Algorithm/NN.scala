@@ -50,14 +50,18 @@ object predictcrime {
         dfhealth.registerTempTable("health")
         dfsocioeconomiccensus.registerTempTable("socioeconomic")
 
+      //  sqlc.sql("SELECT * FROM crime").show(5)
+     //   sqlc.sql("SELECT * FROM health").show(5)
+     //   sqlc.sql("SELECT * FROM socioeconomic").show(5)
+        
         val crimefactors = sqlc.sql("""SELECT
         crime.Year,crime.Month,crime.Day,crime.Time,
         crime.IUCR, crime.Primary_Type,crime.Description,crime.Location_Description,
         crime.Community_Area, crime.Arrest,crime.FBI_Code,crime.Latitude,crime.Longitude
         socioeconomiccensus.PERCENT_OF_HOUSING_CROWDED, 
         socioeconomiccensus.PERCENT_HOUSEHOLDS_BELOW_POVERTY,
-        socioeconomiccensus.PERCENT_AGED_16__UNEMPLOYED, 
-        socioeconomiccensus.PERCENT_AGED_25__WITHOUT_HIGH_SCHOOL_DIPLOMA,
+        socioeconomiccensus.PERCENT_AGED_16+__UNEMPLOYED, 
+        socioeconomiccensus.PERCENT_AGED_25+__WITHOUT_HIGH_SCHOOL_DIPLOMA,
         socioeconomiccensus.PERCENT_AGED_UNDER_18_OR_OVER_64,
         socioeconomiccensus.PER_CAPITA_INCOME, 
         socioeconomiccensus.HARDSHIP_INDEX,
@@ -78,7 +82,7 @@ object predictcrime {
         FROM crime JOIN socioeconomiccensus 
         ON crime.Community_Area = socioeconomiccensus.Community_Area
         JOIN health
-        ON crime.Community_Area = health.Community_Area_Number""".stripMargin)
+        ON crime.Community_Area = health.Community_Area""".stripMargin)
 
         val crimeFactorsdataframe:H2OFrame = crimefactors
         H2OFrameSupport.allStringVecToCategorical(crimeFactorsdataframe)
