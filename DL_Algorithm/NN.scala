@@ -1,18 +1,18 @@
 //https://www.kdnuggets.com/2015/04/deep-learning-fight-crime.html
 //https://blog.cloudera.com/blog/2015/10/how-to-build-a-machine-learning-app-using-sparkling-water-and-apache-spark/
 
-
+spark-shell --packages ai.h2o:sparkling-water-package_2.11:2.1.53,ai.h2o:sparkling-water-core_2.10:1.6.8,ai.h2o:sparkling-water-ml_2.10:1.6.8,ai.h2o:h2o-genmodel:3.10.0.7,org.apache.spark:spark-mllib_2.11:2.2.0,com.databricks:spark-csv_2.10:1.5.0
 
 import org.apache.spark.SparkContext
 import org.apache.spark.h2o.{H2OContext, H2OFrame}
 import org.apache.spark.sql.{DataFrame, SQLContext}
 import java.net._
 import org.apache.spark._
-import hex.deeplearning.DeepLearningModel
-import hex.genmodel.utils._
-import hex.deeplearning.DeepLearningModel.DeepLearningParameters
-import hex.deeplearning.DeepLearningModel.DeepLearningParameters.Activation
-import hex.{Model}
+import _root_.hex.deeplearning.DeepLearningModel
+import _root_.hex.genmodel.utils._
+import _root_.hex.deeplearning.DeepLearningModel.DeepLearningParameters
+import _root_.hex.deeplearning.DeepLearningModel.DeepLearningParameters.Activation
+import _root_.hex.{Model}
 import water.fvec.{Chunk, NewChunk, Vec}
 import water.parser.{BufferedString, ParseSetup}
 import water.support.{H2OFrameSupport, ModelMetricsSupport, SparkContextSupport, SparklingWaterApp}
