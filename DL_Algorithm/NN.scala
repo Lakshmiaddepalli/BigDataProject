@@ -1,7 +1,7 @@
 //https://www.kdnuggets.com/2015/04/deep-learning-fight-crime.html
 //https://blog.cloudera.com/blog/2015/10/how-to-build-a-machine-learning-app-using-sparkling-water-and-apache-spark/
-
-spark-shell --packages ai.h2o:sparkling-water-package_2.11:2.1.53,ai.h2o:sparkling-water-core_2.10:1.6.8,ai.h2o:sparkling-water-ml_2.10:1.6.8,ai.h2o:h2o-genmodel:3.10.0.7,org.apache.spark:spark-mllib_2.11:2.2.0,com.databricks:spark-csv_2.10:1.5.0
+module load spark/2.1.0
+spark-shell --packages ai.h2o:sparkling-water-core_2.11:2.1.12,ai.h2o:sparkling-water-ml_2.11:2.1.12,ai.h2o:h2o-genmodel:3.10.0.7,org.apache.spark:spark-mllib_2.11:2.2.0,com.databricks:spark-csv_2.10:1.5.0,no.priv.garshol.duke:duke:1.2
 
 import org.apache.spark.SparkContext
 import org.apache.spark.h2o.{H2OContext, H2OFrame}
@@ -28,17 +28,27 @@ object predictcrime {
         }*/
         
         System.out.println("Starting Spark Context...")
-        val sc = new SparkContext()
+        
+         //   val sc = new SparkContext()
         val hc = H2OContext.getOrCreate(sc)
         val sqlc = new SQLContext(sc)
+        
+        import hc._
+        import hc.implicits._
+        import sqlc.implicits._
 
-        val crime = asDataFrame(crimedata("hdfs:///user/sla410/crimedatabigdataproject/crimedl.csv"))
-        val health = asDataFrame(healthdata("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv"))
-        val socioeconomiccensus = asDataFrame(socioeconomiccensusdata("socioeconomicfactors1.csv"))
+        //val crime = asDataFrame(crimedata("hdfs:///user/sla410/crimedatabigdataproject/crimedl.csv"))
+        var dfcrime = sqlc.read.format("com.databricks.spark.csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/crimedl1.csv")
+        
+        // val health = asDataFrame(healthdata("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv"))
+        var dfhealth = sqlc.read.format("com.databricks.spark.csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv")
+       
+        // var socioeconomiccensus = asDataFrame(socioeconomiccensusdata("socioeconomicfactors1.csv"))
+        var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors1.csv")
     
-        crime.registerTempTable("crime")
-        health.registerTempTable("health")
-        socioeconomiccensus.registerTempTable("socioeconomic")
+        dfcrime.registerTempTable("crime")
+        dfhealth.registerTempTable("health")
+        dfsocioeconomiccensus.registerTempTable("socioeconomic")
 
         val crimefactors = sqlContext.sql("""SELECT
         crime.Year,crime.Month,crime.Day,crime.Time,
@@ -129,27 +139,28 @@ object predictcrime {
   
     }
 
-    def load(dataset: String, modifyParserSetup: ParseSetup => ParseSetup = identity[ParseSetup]): H2OFrame = {
-      val uri = java.net.URI.create(datafile)
+   /* def load(dataset: String, modifyParserSetup: ParseSetup => ParseSetup = identity[ParseSetup]): H2OFrame = {
+      val uri = java.net.URI.create(dataset)
       val parseSetup = modifyParserSetup(water.fvec.H2OFrame.parserSetup(uri))
-      new H2OFrame(parseSetup, new java.net.URI(datafile))
+      new H2OFrame(parseSetup, new java.net.URI(dataset))
       }
 
     def socioeconomiccensusdata(dataset: String): H2OFrame = {
-    val socioeconomiccensusdataval = loadData(dataset)
+    val socioeconomiccensusdataval = load(dataset)
     socioeconomiccensusdataval
   }
 
   def healthdata(dataset: String): H2OFrame = {
-    val healthdataval = loadData(dataset)
+    val healthdataval = load(dataset)
     healthdataval
   }
 
   def crimedata(dataset: String): H2OFrame = {
-  val crimedataval = loadData(dataset) 
+  val crimedataval = load(dataset) 
   crimedataval
-  }
+  }*/
 }
+
 
 object Crime {
   def apply(Year:Short, Month:Byte, Day:Byte,Time: Byte,
