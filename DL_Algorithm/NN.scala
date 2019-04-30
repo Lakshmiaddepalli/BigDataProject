@@ -44,13 +44,13 @@ object predictcrime {
         var dfhealth = sqlc.read.format("com.databricks.spark.csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv")
        
         // var socioeconomiccensus = asDataFrame(socioeconomiccensusdata("socioeconomicfactors1.csv"))
-        var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors1.csv")
+        var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors.csv")
     
         dfcrime.registerTempTable("crime")
         dfhealth.registerTempTable("health")
         dfsocioeconomiccensus.registerTempTable("socioeconomic")
 
-        val crimefactors = sqlContext.sql("""SELECT
+        val crimefactors = sqlc.sql("""SELECT
         crime.Year,crime.Month,crime.Day,crime.Time,
         crime.IUCR, crime.Primary_Type,crime.Description,crime.Location_Description,
         crime.Community_Area, crime.Arrest,crime.FBI_Code,crime.Latitude,crime.Longitude
