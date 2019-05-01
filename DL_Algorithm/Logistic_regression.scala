@@ -31,7 +31,7 @@ def main (args: Array[String]) {
         val sqlc = new SQLContext(sc) 
         import sqlContext._  
         import sqlContext.implicits._ 
-        val directory = args(0)
+
 
 var dfcrime = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/crimedl1.csv").cache()
 var dfhealth = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv").cache()
@@ -101,10 +101,32 @@ val gnmalesInd = new StringIndexer().setInputCol("Gonorrhea_in_Males").setOutput
 //all the correlation values between arrest and other features lied between -0.01 to 0.01 and hence are highly inependent of each other.
 valcrime.select(corr($"Arrest",$"Year")).show()
 
-var crimetest = Seq(Crime(args(0).toDouble, args(1).toDouble, args(2).toDouble, args(3),args(4), args(5), args(6), args(7), args(8).toDouble, args(9),args(10).toDouble,args(11).toDouble))
-var crimetestdata = sqlc.sparkContext.parallelize(Seq(crimetestdata)).toDF
-var joinedhealthdata = health.join(crimetestdata).where('Community_Area === 'Community_Area)
-var joinedsocioeconomichealth = socioeconomiccensus.join(joinedhealthdata).where('Community_Area === 'Community_Area)
+//var crimetest = Seq(Crime(args(0).toInt, args(1).toInt, args(2).toInt, args(3),args(4), args(5), args(6), args(7), args(8).toInt, args(9),args(10).toDouble,args(11).toDouble))
+
+var crimetest = Seq(Crime("2011".toInt,"08".toInt, "08".toInt, "16:04:30","1210", "THEFT", "OVER $500", "RESTAURANT",32,"15",41.857711367,-87.67196028))
+ import org.apache.spark.sql.SQLContext
+val SqlContext = new SQLContext(sc)
+import SqlContext.implicits._
+ var crimetestdata = SqlContext.sparkContext.parallelize(crimetest).toDF
+ crimetestdata.registerTempTable("crimetable")
+ 
+var dfhealth = SqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv").cache()
+var dfsocioeconomiccensus = SqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors3.csv").cache()
+dfhealth.registerTempTable("health")
+dfsocioeconomiccensus.registerTempTable("socioeconomiccensus")
+ 
+var crimehealthsocioeconomic = SqlContext.sql("""SELECT crimetable.Year,crimetable.Month,crimetable.Day,crimetable.Time,crimetable.IUCR,
+crimetable.Primary_Type,crimetable.Description,crimetable.Location_Description,crimetable.Community_Area,crimetable.FBI_Code,
+crimetable.Latitude,crimetable.Longitude,socioeconomiccensus.PERCENT_OF_HOUSING_CROWDED,socioeconomiccensus.PERCENT_HOUSEHOLDS_BELOW_POVERTY,
+socioeconomiccensus.PERCENT_AGED_16_UNEMPLOYED,socioeconomiccensus.PERCENT_AGED_25_WITHOUT_HIGH_SCHOOL_DIPLOMA,socioeconomiccensus.PERCENT_AGED_UNDER_18_OR_OVER_64,
+socioeconomiccensus.PER_CAPITA_INCOME, socioeconomiccensus.HARDSHIP_INDEX,health.Birth_Rate,health.General_Fertility_Rate,health.Low_Birth_Weight,health.Prenatal_Care_Beginning_in_First_Trimester,
+health.Preterm_Births,health.Teen_Birth_Rate,health.Assault,health.Breast_cancer_in_females,health.Cancer,health.Colorectal_Cancer,
+health.Diabetes_related,health.Firearm_related,health.Infant_Mortality_Rate,health.Lung_Cancer,health.Prostate_Cancer_in_Males,health.Stroke,
+health.Childhood_Blood_Lead_Level_Screening,health.Childhood_Lead_Poisoning,health.Gonorrhea_in_Females,
+health.Gonorrhea_in_Males,health.Tuberculosis FROM  crimetable JOIN socioeconomiccensus ON crimetable.Community_Area = socioeconomiccensus.Community_Area
+JOIN  health ON crimetable.Community_Area = health.Community_Area""".stripMargin)
+
+var valcrimetest = crimehealthsocioeconomic.na.drop()
   
 var valcrimetest = joinedsocioeconomichealth.na.drop()
   
