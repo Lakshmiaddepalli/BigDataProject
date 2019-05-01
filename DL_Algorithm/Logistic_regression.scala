@@ -158,7 +158,7 @@ val predictionAndLabels = result.map { row =>
 }
 val metrics = new BinaryClassificationMetrics(predictionAndLabels)
 println("Area under ROC = " + metrics.areaUnderROC()) //Area under ROC = 0.5393021885782492
-model = pipeline.fit(train_data)
+model = pipeline.fit(valcrime)
 result = model.transform(valcrimetest)
 result = result.select("PassengerId","prediction")
 val submitRDD = result.map { row =>
