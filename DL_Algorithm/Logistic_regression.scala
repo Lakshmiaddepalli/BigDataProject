@@ -16,6 +16,10 @@ import org.apache.spark.sql.functions.mean
 
 
 val sqlc = new SQLContext(sc)
+
+case class Crime(Year: Double, Month: Double, Day: Double, Time: String, IUCR: String, Primary_Type: String,Description: String, 
+                 Location_Description: String,Community_Area: Double, FBI_Code: String, Latitude: Double, Longitude: Double)
+
 var dfcrime = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/crimedl1.csv").cache()
 var dfhealth = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/publichealth.csv").cache()
 var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors3.csv").cache()
