@@ -81,11 +81,12 @@ val locationdescriptionInd = new StringIndexer().setInputCol("Location_Descripti
 val fbicodeInd = new StringIndexer().setInputCol("FBI_Code").setOutputCol("FBICodeIndex").setHandleInvalid("skip")
 val gnmalesInd = new StringIndexer().setInputCol("Gonorrhea_in_Males").setOutputCol("GonorrheainMalesIndex").setHandleInvalid("skip")
 
+//all the correlation values between arrest and other features lied between -0.01 to 0.01 and hence are highly inependent of each other.
 valcrime.select(corr($"Arrest",$"Year")).show()
 
 val assembler = new VectorAssembler().setInputCols(Array("Year", "Month", "Day", "TimeIndex","IUCRIndex", "PrimaryTypeIndex","DescriptionIndex","LocationDescriptionIndex","Community_Area","FBICodeIndex","Latitude","Longitude","PERCENT_OF_HOUSING_CROWDED","PERCENT_HOUSEHOLDS_BELOW_POVERTY","PERCENT_AGED_16_UNEMPLOYED","PERCENT_AGED_25_WITHOUT_HIGH_SCHOOL_DIPLOMA","PERCENT_AGED_UNDER_18_OR_OVER_64","PER_CAPITA_INCOME","HARDSHIP_INDEX","Birth_Rate","General_Fertility_Rate","Low_Birth_Weight","Prenatal_Care_Beginning_in_First_Trimester","Preterm_Births","Teen_Birth_Rate","Assault","Breast_cancer_in_females","Cancer","Colorectal_Cancer","Diabetes_related","Firearm_related","Infant_Mortality_Rate","Lung_Cancer","Prostate_Cancer_in_Males","Stroke","Childhood_Blood_Lead_Level_Screening","Childhood_Lead_Poisoning","Gonorrhea_in_Females","GonorrheainMalesIndex","Tuberculosis")).setOutputCol("features_temp")
 val normalizer = new Normalizer().setInputCol("features_temp").setOutputCol("features").setP(1.0)
-val lr = new LogisticRegression().setMaxIter(10)
+val lr = new LogisticRegression().setMaxIter(100000)
 lr.setLabelCol("Arrest")
 
 val pipeline = new Pipeline().setStages(Array(timeInd, iucrInd, primarytypeInd,descriptionInd,locationdescriptionInd,fbicodeInd,gnmalesInd, assembler, normalizer,lr))
@@ -100,5 +101,5 @@ val predictionAndLabels = result.map { row =>
  (row.get(0).asInstanceOf[Double],row.get(1).asInstanceOf[Double])
 }
 val metrics = new BinaryClassificationMetrics(predictionAndLabels)
-println("Area under ROC = " + metrics.areaUnderROC())
+println("Area under ROC = " + metrics.areaUnderROC()) //Area under ROC = 0.5393021885782492
 model = pipeline.fit(train_data)
