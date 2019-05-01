@@ -103,7 +103,7 @@ valcrime.select(corr($"Arrest",$"Year")).show()
 
 //var crimetest = Seq(Crime(args(0).toInt, args(1).toInt, args(2).toInt, args(3),args(4), args(5), args(6), args(7), args(8).toInt, args(9),args(10).toDouble,args(11).toDouble))
 
-var crimetest = Seq(Crime("2011".toInt,"08".toInt, "08".toInt, "16:04:30","1210", "THEFT", "OVER $500", "RESTAURANT",32,"15",41.857711367,-87.67196028))
+var crimetest = Seq(Crime("2010".toInt,"01".toInt, "20".toInt, "11:55:00","1150", "DECEPTIVE PRACTICE", "CREDIT CARD FRAUD", "OTHER",32,"11",41.887711996,-87.617139647))
  import org.apache.spark.sql.SQLContext
 val SqlContext = new SQLContext(sc)
 import SqlContext.implicits._
@@ -128,7 +128,7 @@ JOIN  health ON crimetable.Community_Area = health.Community_Area""".stripMargin
 
 var valcrimetest = crimehealthsocioeconomic.na.drop()
   
-var valcrimetest = joinedsocioeconomichealth.na.drop()
+//var valcrimetest = joinedsocioeconomichealth.na.drop()
   
 val toarrest = sqlContext.udf.register("toarrest", ((n: String) => { 0.0 }))
   
@@ -160,7 +160,7 @@ val metrics = new BinaryClassificationMetrics(predictionAndLabels)
 println("Area under ROC = " + metrics.areaUnderROC()) //Area under ROC = 0.5393021885782492
 model = pipeline.fit(valcrime)
 result = model.transform(valcrimetest)
-result = result.select("PassengerId","prediction")
+result = result.select("Arrest","prediction")
 val submitRDD = result.map { row =>
 (row.get(0).asInstanceOf[Int],row.get(1).asInstanceOf[Double].toInt)
 }
