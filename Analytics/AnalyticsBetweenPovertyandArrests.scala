@@ -14,11 +14,13 @@ var CommunityWisePovertyRateandArrestsNotMade = df3.groupBy($"Community Area",$"
 CommunityWisePovertyRateandArrestsNotMade.collect().foreach(println)
 
 //It could be seen that the top 5 Areas were where the arrests were not made and 3 out of 5 had a had high percentage of poverty above the threshold value 21.739743589743593.
-[25,false,28.6,317]   //Austin                                                          
-[8,false,12.9,235]    //Near North Side
-[43,false,31.1,217]   //South Shore
-[23,false,33.9,169]   //Humboldt Park
-[24,false,14.7,169]   //West Town
+
+[25,false,28.6,27639]   //Austin                                                          
+[25,true,28.6,19380]    //Austin    
+[43,false,31.1,18678]   //South Shore
+[24,false,14.7,17696]   //West Town
+[8,false,12.9,16614]    //Near North Side
+[67,false,34.4,15517]   
 
 
 //Austin already was high on criminal activity but we could see that the poverty line was also above threshold
