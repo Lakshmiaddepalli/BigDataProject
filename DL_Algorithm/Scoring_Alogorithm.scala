@@ -17,4 +17,4 @@ sexoffenderscount.write.format("csv").option("header", "true").save("hdfs:///use
 
 
 var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors3.csv").cache()
-var hardshipcount = dfsocioeconomiccensus.select
+var hardshipcount = dfsocioeconomiccensus.select("")
