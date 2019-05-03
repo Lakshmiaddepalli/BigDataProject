@@ -1,5 +1,7 @@
 spark-shell --packages com.databricks:spark-csv_2.10:1.5.0
 import org.apache.spark.sql.SQLContext
+import java.text.SimpleDateFormat
+
 val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 
 
