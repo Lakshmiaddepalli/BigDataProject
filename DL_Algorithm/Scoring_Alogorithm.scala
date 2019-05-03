@@ -1,4 +1,4 @@
-
+spark-shell --packages com.databricks:spark-csv_2.10:1.5.0
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.DataFrame
@@ -19,3 +19,8 @@ sexoffenderscount.write.format("csv").option("header", "true").save("hdfs:///use
 var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors3.csv").cache()
 var hardshipcount = dfsocioeconomiccensus.select("Community_Area","HARDSHIP_INDEX")
 hardshipcount.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/socioeconomiccount.csv")
+
+
+var dfaffordablehousing = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/Affordable_Rental_Housing_Developments.csv").cache()
+var affordhouse = dfaffordablehousing.groupBy("Community Area Number").agg(sum("Units"))
+affordhouse.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/affordhousecountcommunitywise.csv")
