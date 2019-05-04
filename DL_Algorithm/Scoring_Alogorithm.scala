@@ -43,9 +43,16 @@ hardshipcount.write.format("csv").option("header", "true").save("hdfs:///user/sl
 
 var dfaffordablehousing = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/Affordable_Rental_Housing_Developments.csv").cache()
 var affordhouse = dfaffordablehousing.rdd
-var affordhouselocations = affordhouse.map(x => Vectors.dense(x.getDouble(12),x.getDouble(13)))
+var affordhouselocations = affordhouse.map(x => Vectors.dense(x.getDouble(11),x.getDouble(12)))
 //var affordhouse = dfaffordablehousing.groupBy("Community Area Number").agg(sum("Units"))
 
-val affordinghousesmodel = KMeans.train(affordhouselocations, 100, 20)
-affordhouse.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/affordhousecountcommunitywise.csv")
+val affordinghousesmodel = KMeans.train(affordhouselocations, 50, 20)
+var affordhousemapping = affordinghousesmodel.predict(affordhouselocations).map(r => (r, 1)).reduceByKey(_ + _).map(r => r._2)
+
+var joinhouseval = affordinghousesmodel.clusterCenters.zip(affordhousemapping.collect())
+var housepoints = sc.parallelize(joinhouseval)
+
+var affordhousemap = housepoints.map( h => h._1(0).toString + "," + h._1(1).toString + "," + h._2)
+affordhousemap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabigdataproject/affordablehouse.csv")
+//affordhouse.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/affordhousecountcommunitywise.csv")
 
