@@ -75,3 +75,4 @@ var affordhousemap = housepoints.map( h => h._1(0).toString + "," + h._1(1).toSt
 affordhousemap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabigdataproject/affordablehouse.csv")
 //affordhouse.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/affordhousecountcommunitywise.csv")
 
+val unionData = affordhouselocations.union(restaurantlocations).cache()
