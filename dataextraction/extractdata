@@ -1,3 +1,8 @@
 df.write.format("com.databricks.spark.csv").save("hdfs:///user/sla410/crimedatabigdataproject/data1/")
 hdfs dfs -cat hdfs:///user/sla410/crimedatabigdataproject/data/part* > crimescleaneddata.csv
 scp sla410@dumbo.es.its.nyu.edu:/home/sla410/crimescleaneddata1.csv .
+
+
+hdfs dfs -copyToLocal "hdfs:///user/sla410/crimedatabigdataproject/crimecluster.csv" .
+hdfs dfs -cat hdfs:///user/sla410/crimedatabigdataproject/crimecluster.csv/part* > crimeclustersfinal.csv
+scp sla410@dumbo.es.its.nyu.edu:/home/sla410/crimeclustersfinal.csv .
