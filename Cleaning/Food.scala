@@ -17,10 +17,10 @@ var types = dfRestaurant.groupBy($"Risk").count()
 types.collect().foreach(println)
 
 var cleanrestaurants = dfRestaurant.filter(dfRestaurant("Risk") === "Risk 3 (Low)")
-cleanrestaurants = cleanrestaurants.filter(!($"Latitude"===""))
-cleanrestaurants = cleanrestaurants.filter(!($"Longitude"===""))
+cleanrestaurants = cleanrestaurants.filter(!($"Latitude").isNull)
+cleanrestaurants = cleanrestaurants.filter(!($"Longitude").isNull)
 
-cleanrestaurants.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/cleanrestaurants.csv")
+cleanrestaurants.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/cleanrestaurantsfinal.csv")
 
 
 
