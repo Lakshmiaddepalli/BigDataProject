@@ -13,4 +13,7 @@ import sqlc._
 import sqlc.implicits._
 
 var dfRestaurant = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/Food_Inspections_modified.csv").cache()
+var types = dfRestaurant.groupBy($"Risk").count()
+types.collect().foreach(println)
+
 
