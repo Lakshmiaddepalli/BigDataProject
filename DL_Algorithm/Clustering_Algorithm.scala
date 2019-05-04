@@ -18,7 +18,7 @@ val crimelocations = crimerdd.map(x => Vectors.dense(x.getDouble(11),x.getDouble
 
 //var Communityareacount =  dfcrime.groupBy($"Community_Area").count().orderBy(desc("count"))
 val crimemodel = KMeans.train(crimelocations, 100, 20)
-var crimemapping = crimeModel.predict(crimelocations).map(r => (r, 1)).reduceByKey(_ + _).map(r => r._2)
+var crimemapping = crimemodel.predict(crimelocations).map(r => (r, 1)).reduceByKey(_ + _).map(r => r._2)
 
 //crimemapping.collect.foreach(println)
 var joinval = crimeModel.clusterCenters.zip(crimemapping.collect())
@@ -29,6 +29,26 @@ var crimepointsmap = crimepoints.map( c => c._1(0).toString + "," + c._1(1).toSt
 crimepointsmap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabigdataproject/crimecluster1.csv")
 //crimepointsmap.toDF.coalesce(1).write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/crimecluster.csv")
 //Communityareacount.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/crimecount.csv")
+
+val sqlc = new SQLContext(sc) 
+import sqlc._
+import sqlc.implicits._
+
+var dfrestaurant = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/cleanrestaurants.csv").cache()
+val restaurantrdd = dfrestaurant.rdd
+val restaurantlocations = restaurantrdd.map(x => Vectors.dense(x.getDouble(15),x.getDouble(16)))
+
+//var Communityareacount =  dfcrime.groupBy($"Community_Area").count().orderBy(desc("count"))
+val restaurantmodel = KMeans.train(restaurantlocations, 100, 20)
+var restaurantmapping = restaurantmodel.predict(restaurantlocations).map(r => (r, 1)).reduceByKey(_ + _).map(r => r._2)
+
+//crimemapping.collect.foreach(println)
+var joinrestaurantval = restaurantmodel.clusterCenters.zip(restaurantmapping.collect())
+var restaurantpoints = sc.parallelize(joinrestaurantval)
+
+//crimepoints.collect().foreach(println)
+var restaurantpointsmap = restaurantpoints.map( c => c._1(0).toString + "," + c._1(1).toString + "," + c._2)
+restaurantpointsmap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabigdataproject/restaurantscluster.csv")
 
 
 var dfsexoffenders = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/SexOffendersfinal.csv").cache()
