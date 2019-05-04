@@ -16,4 +16,6 @@ var dfRestaurant = sqlc.read.format("com.databricks.spark.csv").option("header",
 var types = dfRestaurant.groupBy($"Risk").count()
 types.collect().foreach(println)
 
+var cleanrestaurants = dfRestaurant.filter(dfRestaurant("Risk") === "Risk 3 (Low)")
+
 
