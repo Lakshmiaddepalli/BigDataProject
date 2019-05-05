@@ -30,13 +30,14 @@ var crimepointsmap = crimepoints.map( c => c._1(0).toString + "," + c._1(1).toSt
 crimepointsmap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabigdataproject/crimecluster1.csv")
 //crimepointsmap.toDF.coalesce(1).write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/crimecluster.csv")
 //Communityareacount.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/crimecount.csv")
+val toDouble = sqlContext.udf.register("toDouble", ((n: String) => { n.toDouble }))
 
 var dfrestaurant = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/cleanrestaurantsfinal.csv").cache()
 var finaldfrestaurant = dfrestaurant.withColumn("Longitude", toDouble(dfrestaurant("Longitude")))
 finaldfrestaurant = finaldfrestaurant.withColumn("Latitude", toDouble(finaldfrestaurant("Latitude")))
 var restaurantrdd = finaldfrestaurant.rdd
-//var restaurantlocations = restaurantrdd.map(x => x(15)+ "," + x(16))
-var restaurantlocations = restaurantrdd.map(x => Vectors.dense(x.getDouble(15),x.getDouble(16)))
+//var restaurantlocations = restaurantrdd.map(x => x(14)+ "," + x(15))
+var restaurantlocations = restaurantrdd.map(x => Vectors.dense(x.getDouble(14),x.getDouble(15)))
 restaurantlocations.collect().foreach(println)
 //var Communityareacount =  dfcrime.groupBy($"Community_Area").count().orderBy(desc("count"))
 val restaurantmodel = KMeans.train(restaurantlocations, 100, 20)
