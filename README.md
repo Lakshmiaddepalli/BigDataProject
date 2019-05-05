@@ -11,8 +11,8 @@ We are using the following data to analyse best community to live in Chicago. we
 5. Crimes Description (Presently Used)
 6. Sex Offenders (Presently Used)
 7. neighbourhoods (shape file) (Presently Used)
-8. Food Inspection (Future Work)
-9. Affordable Rental Housing (Future Work)
+8. Food Inspection (Presently Used)
+9. Affordable Rental Housing (Presently Used)
 
 All the data can be found on https://data.cityofchicago.org/
 
