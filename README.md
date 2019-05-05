@@ -9,7 +9,7 @@ We are using the following data to analyse best community to live in Chicago. we
 3. Public Health Statistics- Selected public health indicators by Chicago community area(Presently Used)
 4. Crimes Description (Presently Used)
 5. Sex Offenders (Presently Used)
-6. neighbourhoods (shape file) (Presently Used)
+6. neighbourhoods (shape file) (Presently Used) [https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Community-Areas-current-/cauq-8yn6]
 7. Food Inspection (Presently Used)
 8. Affordable Rental Housing (Presently Used)
 9. 311 Service Requests - Vacant and Abandoned Buildings Reported.csv (Future Work)
