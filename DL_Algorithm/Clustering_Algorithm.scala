@@ -10,7 +10,15 @@ import sqlc.implicits._
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.clustering.KMeans
 import scala.collection.mutable.ArrayBuffer
+import com.koddi.geocoder.Geocoder
 
+
+ //  println(args.mkString(","))
+
+    //val geoWithKey = Geocoder.create("AIzaSyA7iBwz17N_5hySdDSZGSDerO78_b8XUbw")
+    // val results = geoWithKey.lookup(args(0))
+    // val location = results.head.geometry.location
+    // println(s"Latitude: ${location.latitude}, Longitude: ${location.longitude}")
 
 var dfcrime = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/crimedl1.csv").cache()
 //dfcrime.filter(dfcrime("Primary_Type") === "OTHER OFFENSE" || dfcrime("Primary_Type") === "PUBLIC INDECENCY" || dfcrime("Primary_Type") === "DECEPTIVE PRACTICE" || dfcrime("Primary_Type") === "OBSCENITY" || dfcrime("Primary_Type") === "MOTOR VEHICLE THEFT" || dfcrime("Primary_Type") === "CRIMINAL DAMAGE" ||dfcrime("Primary_Type") === "GAMBLING" || dfcrime("Primary_Type") === "LIQUOR LAW VIOLATION" || dfcrime("Primary_Type") === "INTIMIDATION" || dfcrime("Primary_Type") === "NON-CRIMINAL" || dfcrime("Primary_Type") === "CRIMINAL TRESPASS" || dfcrime("Primary_Type") === "PUBLIC PEACE VIOLATION")
@@ -83,15 +91,15 @@ affordhousemap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabigdatap
 
 val uniondata = affordinghouseslocationsfin.union(restaurantslocationsfin).cache()
 var finalunion = uniondata.union(crimelocationsfin).cache()
-var allmodel = KMeans.train(finalunion, 500, 20)
+var allmodel = KMeans.train(finalunion, 400, 20)
 
-var housecluster = allmodel.predict(affordhouselocations)
+var housecluster = allmodel.predict(affordinghouseslocationsfin)
 var houseclustermap = housecluster.map(r => (r,1))
 
-var foodcluster = allmodel.predict(restaurantlocations)
+var foodcluster = allmodel.predict(restaurantslocationsfin)
 var foodclustermap = foodcluster.map(r => (r, 2))
 
-var crimecluster = allmodel.predict(crimelocations)
+var crimecluster = allmodel.predict(crimelocationsfin)
 var crimeclustermap = crimecluster.map(r => (r,3))
 
 var u1 = foodclustermap.union(crimeclustermap)
@@ -100,15 +108,25 @@ var u2 = u1.union(houseclustermap)
 var filterClusterCenters = u2.groupBy(_._1)
 //filterClusterCenters.collect().foreach(println)
 
-filterClusterCenters = filterClusterCenters.map(r => (r._1, r._2.map(_._2).toSet.size, r._2.map(_._2).size))
-var modelsfoodandhousing  = filterClusterCenters.filter(r => r._2 == 1 || r => r._2 == 2)
+var filterCluster = filterClusterCenters.map(r => (r._1, r._2.map(_._2).toSet, r._2.map(_._2).size))
+//filterCluster.collect().foreach(println)
+var removevalues  = filterCluster.filter((r => r._2.contains(3)))
+var modelsfoodandhousing  = filterCluster.subtract(removevalues)
 modelsfoodandhousing.collect().foreach(println)
 
-var finalval = modelsfoodandhousing.map(r => (allmodel.clusterCenters(r._1), r._3))
+var finalval = modelsfoodandhousing.map(r => (r._1,allmodel.clusterCenters(r._1), r._3))
 //finalval.collect().foreach(println)
 
-var ans = allmodel.predict(Vectors.dense(args(0).toDouble,args(1).toDouble))
+//2339 N California Ave, Chicago, IL 60647, USA
+//var ans = allmodel.predict(Vectors.dense(41.924068,-87.697201))
+var ans = allmodel.predict(Vectors.dense(location.latitude.toDouble,location.longitude.toDouble))
 var  clusterans  = modelsfoodandhousing.filter(a => a._1 == ans)
 
 var locations = clusterans.map(r => (allmodel.clusterCenters(r._1)))
-var locationscordinate = locations.collect().foreach(println)
+var locationscordinate = locations.take(1)
+
+var latitude = locationscordinate(0)(0)
+var longitude = locationscordinate(0)(1)
+
+var results = geoWithKey.lookup(latitude, longitude)
+println(results)
