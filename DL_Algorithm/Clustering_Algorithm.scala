@@ -13,16 +13,18 @@ import scala.collection.mutable.ArrayBuffer
 
 
 var dfcrime = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/crimedl1.csv").cache()
-dfcrime.filter(dfcrime("Primary_Type") === "OTHER OFFENSE" || dfcrime("Primary_Type") === "PUBLIC INDECENCY" || dfcrime("Primary_Type") === "DECEPTIVE PRACTICE" || dfcrime("Primary_Type") === "OBSCENITY" || dfcrime("Primary_Type") === "MOTOR VEHICLE THEFT" || dfcrime("Primary_Type") === "CRIMINAL DAMAGE" ||dfcrime("Primary_Type") === "GAMBLING" || dfcrime("Primary_Type") === "LIQUOR LAW VIOLATION" || dfcrime("Primary_Type") === "INTIMIDATION" || dfcrime("Primary_Type") === "NON-CRIMINAL" || dfcrime("Primary_Type") === "CRIMINAL TRESPASS" || dfcrime("Primary_Type") === "PUBLIC PEACE VIOLATION")
+//dfcrime.filter(dfcrime("Primary_Type") === "OTHER OFFENSE" || dfcrime("Primary_Type") === "PUBLIC INDECENCY" || dfcrime("Primary_Type") === "DECEPTIVE PRACTICE" || dfcrime("Primary_Type") === "OBSCENITY" || dfcrime("Primary_Type") === "MOTOR VEHICLE THEFT" || dfcrime("Primary_Type") === "CRIMINAL DAMAGE" ||dfcrime("Primary_Type") === "GAMBLING" || dfcrime("Primary_Type") === "LIQUOR LAW VIOLATION" || dfcrime("Primary_Type") === "INTIMIDATION" || dfcrime("Primary_Type") === "NON-CRIMINAL" || dfcrime("Primary_Type") === "CRIMINAL TRESPASS" || dfcrime("Primary_Type") === "PUBLIC PEACE VIOLATION")
+
 val crimerdd = dfcrime.rdd
 val crimelocations = crimerdd.map(x => Vectors.dense(x.getDouble(11),x.getDouble(12)))
 
 //var Communityareacount =  dfcrime.groupBy($"Community_Area").count().orderBy(desc("count"))
-val crimemodel = KMeans.train(crimelocations, 100, 20)
+val crimemodel = KMeans.train(crimelocations, 300, 20)
 var crimemapping = crimemodel.predict(crimelocations).map(r => (r, 1)).reduceByKey(_ + _).map(r => r._2)
 
 //crimemapping.collect.foreach(println)
 var joinval = crimemodel.clusterCenters.zip(crimemapping.collect())
+var crimelocationsfin = sc.parallelize(crimemodel.clusterCenters)
 var crimepoints = sc.parallelize(joinval)
 
 //crimepoints.collect().foreach(println)
@@ -40,11 +42,12 @@ var restaurantrdd = finaldfrestaurant.rdd
 var restaurantlocations = restaurantrdd.map(x => Vectors.dense(x.getDouble(14),x.getDouble(15)))
 restaurantlocations.collect().foreach(println)
 //var Communityareacount =  dfcrime.groupBy($"Community_Area").count().orderBy(desc("count"))
-val restaurantmodel = KMeans.train(restaurantlocations, 100, 20)
+val restaurantmodel = KMeans.train(restaurantlocations, 300, 20)
 var restaurantmapping = restaurantmodel.predict(restaurantlocations).map(r => (r, 1)).reduceByKey(_ + _).map(r => r._2)
 
 //crimemapping.collect.foreach(println)
 var joinrestaurantval = restaurantmodel.clusterCenters.zip(restaurantmapping.collect())
+var restaurantslocationsfin = sc.parallelize(restaurantmodel.clusterCenters)
 var restaurantpoints = sc.parallelize(joinrestaurantval)
 
 //crimepoints.collect().foreach(println)
@@ -67,7 +70,8 @@ var affordhouse = dfaffordablehousing.rdd
 var affordhouselocations = affordhouse.map(x => Vectors.dense(x.getDouble(11),x.getDouble(12)))
 //var affordhouse = dfaffordablehousing.groupBy("Community Area Number").agg(sum("Units"))
 
-val affordinghousesmodel = KMeans.train(affordhouselocations, 50, 20)
+val affordinghousesmodel = KMeans.train(affordhouselocations, 300, 20)
+var affordinghouseslocationsfin = sc.parallelize(affordinghousesmodel.clusterCenters)
 var affordhousemapping = affordinghousesmodel.predict(affordhouselocations).map(r => (r, 1)).reduceByKey(_ + _).map(r => r._2)
 
 var joinhouseval = affordinghousesmodel.clusterCenters.zip(affordhousemapping.collect())
@@ -77,8 +81,8 @@ var affordhousemap = housepoints.map( h => h._1(0).toString + "," + h._1(1).toSt
 affordhousemap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabigdataproject/affordablehouse.csv")
 //affordhouse.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/affordhousecountcommunitywise.csv")
 
-val uniondata = affordhouselocations.union(restaurantlocations).cache()
-var finalunion = uniondata.union(crimelocations).cache()
+val uniondata = affordinghouseslocationsfin.union(restaurantslocationsfin).cache()
+var finalunion = uniondata.union(crimelocationsfin).cache()
 var allmodel = KMeans.train(finalunion, 500, 20)
 
 var housecluster = allmodel.predict(affordhouselocations)
