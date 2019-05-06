@@ -128,5 +128,5 @@ var locationscordinate = locations.take(1)
 var latitude = locationscordinate(0)(0)
 var longitude = locationscordinate(0)(1)
 
-var results = geoWithKey.lookup(latitude, longitude)
-println(results)
+var recommendedplace = geoWithKey.lookup(latitude, longitude)
+println(recommendedplace)
