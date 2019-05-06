@@ -77,4 +77,34 @@ var affordhousemap = housepoints.map( h => h._1(0).toString + "," + h._1(1).toSt
 affordhousemap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabigdataproject/affordablehouse.csv")
 //affordhouse.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/affordhousecountcommunitywise.csv")
 
-val unionData = affordhouselocations.union(restaurantlocations).cache()
+val uniondata = affordhouselocations.union(restaurantlocations).cache()
+var finalunion = uniondata.union(crimelocations).cache()
+var allmodel = KMeans.train(finalunion, 500, 20)
+
+var housecluster = allmodel.predict(affordhouselocations)
+var houseclustermap = housecluster.map(r => (r,1))
+
+var foodcluster = allmodel.predict(restaurantlocations)
+var foodclustermap = foodcluster.map(r => (r, 2))
+
+var crimecluster = allmodel.predict(crimelocations)
+var crimeclustermap = crimecluster.map(r => (r,3))
+
+var u1 = foodclustermap.union(crimeclustermap)
+var u2 = u1.union(houseclustermap)
+
+var filterClusterCenters = u2.groupBy(_._1)
+//filterClusterCenters.collect().foreach(println)
+
+filterClusterCenters = filterClusterCenters.map(r => (r._1, r._2.map(_._2).toSet.size, r._2.map(_._2).size))
+var modelsfoodandhousing  = filterClusterCenters.filter(r => r._2 == 1 || r => r._2 == 2)
+modelsfoodandhousing.collect().foreach(println)
+
+var finalval = modelsfoodandhousing.map(r => (allmodel.clusterCenters(r._1), r._3))
+//finalval.collect().foreach(println)
+
+var ans = allmodel.predict(Vectors.dense(args(0).toDouble,args(1).toDouble))
+var  clusterans  = modelsfoodandhousing.filter(a => a._1 == ans)
+
+var locations = clusterans.map(r => (allmodel.clusterCenters(r._1)))
+var locationscordinate = locations.collect().foreach(println)
