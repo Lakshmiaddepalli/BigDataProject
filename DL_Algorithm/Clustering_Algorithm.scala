@@ -64,9 +64,17 @@ restaurantpointsmap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabig
 
 
 var dfsexoffenders = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/SexOffendersfinal.csv").cache()
-var sexoffenderscount =  dfsexoffenders.groupBy($"Community Area Number").count().orderBy(desc("count"))
-sexoffenderscount.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/sexoffenderscount.csv")
+val sexoffendersrdd = dfsexoffenders.rdd
+val sexoffenderslocations = sexoffendersrdd.map(x => Vectors.dense(x.getDouble(10),x.getDouble(11)))
+sexoffenderslocations.collect().foreach(println)
+val sexoffendersmodel = KMeans.train(sexoffenderslocations, 300, 20)
+var sexoffendersmapping = sexoffendersmodel.predict(sexoffenderslocations).map(r => (r, 1)).reduceByKey(_ + _).map(r => r._2)
+var joinsexoffendersval = sexoffendersmodel.clusterCenters.zip(sexoffendersmapping.collect())
+var sexoffenderslocationsfin = sc.parallelize(sexoffendersmodel.clusterCenters)
+var sexoffenderspoints = sc.parallelize(joinsexoffendersval)
 
+var sexoffenderspointsmap = sexoffenderspoints.map( c => c._1(0).toString + "," + c._1(1).toString + "," + c._2)
+sexoffenderspointsmap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabigdataproject/sexoffenderscluster.csv")
 
 //var dfsocioeconomiccensus = sqlc.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("hdfs:///user/sla410/crimedatabigdataproject/socioeconomicfactors3.csv").cache()
 //var hardshipcount = dfsocioeconomiccensus.select("Community_Area","HARDSHIP_INDEX")
@@ -90,7 +98,8 @@ affordhousemap.coalesce(1).saveAsTextFile("hdfs:///user/sla410/crimedatabigdatap
 //affordhouse.write.format("csv").option("header", "true").save("hdfs:///user/sla410/crimedatabigdataproject/affordhousecountcommunitywise.csv")
 
 val uniondata = affordinghouseslocationsfin.union(restaurantslocationsfin).cache()
-var finalunion = uniondata.union(crimelocationsfin).cache()
+val  uniondata1 = uniondata.union(sexoffenderslocationsfin).cache()
+var finalunion = uniondata1.union(crimelocationsfin).cache()
 var allmodel = KMeans.train(finalunion, 400, 20)
 
 var housecluster = allmodel.predict(affordinghouseslocationsfin)
@@ -102,16 +111,22 @@ var foodclustermap = foodcluster.map(r => (r, 2))
 var crimecluster = allmodel.predict(crimelocationsfin)
 var crimeclustermap = crimecluster.map(r => (r,3))
 
+var sexoffenderscluster = allmodel.predict(sexoffenderslocationsfin)
+var sexoffendersclustermap = sexoffenderscluster.map(r => (r,4))
+
 var u1 = foodclustermap.union(crimeclustermap)
 var u2 = u1.union(houseclustermap)
+var u3 = u2.union(sexoffendersclustermap)
 
-var filterClusterCenters = u2.groupBy(_._1)
+var filterClusterCenters = u3.groupBy(_._1)
 //filterClusterCenters.collect().foreach(println)
 
 var filterCluster = filterClusterCenters.map(r => (r._1, r._2.map(_._2).toSet, r._2.map(_._2).size))
 //filterCluster.collect().foreach(println)
 var removevalues  = filterCluster.filter((r => r._2.contains(3)))
-var modelsfoodandhousing  = filterCluster.subtract(removevalues)
+var removevalues1 = filterCluster.filter((r => r._2.contains(4)))
+var intermediate = filterCluster.subtract(removevalues)
+var modelsfoodandhousing  = intermediate.subtract(removevalues1)
 modelsfoodandhousing.collect().foreach(println)
 
 var finalval = modelsfoodandhousing.map(r => (r._1,allmodel.clusterCenters(r._1), r._3))
