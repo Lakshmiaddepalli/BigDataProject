@@ -63,8 +63,23 @@ c. Feature Selection: Correlation analysis was done to get the interdependence b
 
 # 05. Profiling - Mentioned above
 
-06. Analytics
-Found 
+# 06. Analytics
+The following Analytics was done: 
+
+Analytics of CrimeData
+
+Analytics Between Poverty and Arrests
+
+CommunityWise Crime Analysis and Housing Crowded
+
+CommunityWise Primary Crime Income and Unemployment
+
+CommunityWise Primary Crime and Hardship
+
+Community Wise Primary Type And Illiteracy
+
+Community Wise Total Vacant Buildings
+
 07. Visualisation
 08. DL_Algorithm
 09. Outputs
