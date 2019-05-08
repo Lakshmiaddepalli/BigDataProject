@@ -38,7 +38,7 @@ https://github.com/KoddiDev/geocoder
 It contains the datasets used for the project. Some might not be present as they  are  greater than 25 MB
 
 # 02. DataIngestion
-It  contains the scala code for ingesting the datasets into the HDFS.
+It  contains the scala code for ingesting the datasets into the HDFS. 
 
 # 03. Preprocessing
 It  contains the scala code for preprocessing the datasets. The following methods are done in preprocessing.
@@ -110,6 +110,8 @@ we looked at the historical crime data from Chicago and joined this data with ot
 We are predicting an arrest and with such analytics we can deploy more police over the unsafe areas and make the streets more safe.
 
 b. To recommend nearby safe places to an end user given an input  as an address. It takes into contch sideration the nearby  clean restaurants, affordable housing, crimes and if the user is a female then the use of sexoffenders list.
+
+To execute the codes import both the applications in intellij for scala and run it with the given program arguments as above.
 
 # 09. Outputs
 It  contains the screenshots and results of above remediation code
