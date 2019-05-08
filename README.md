@@ -90,11 +90,38 @@ Community Wise Total Vacant Buildings
 # 07. Visualisation
 The visualisations of above crime analytics and clusters of restaurants, affordable housing,  crimes, sexoffenders  and safe places.
 
-08. DL_Algorithm
-09. Outputs
-10. dataextraction
-11. Remediation_Code
-12. Extras
-13. issues.md
-14. Papers
-15. Bitcoin
+# 08. DL_Algorithm
+the following mllib algorithms have been used
+
+a. Classification - Logistic Regression:  to classify an arrest will happen or not
+                    Neural Networks: to classify an arrest will happen or not(was getting  garbage collection issues)
+                    
+b. Clustering - Kmeans was used to cluster similar things together here restaurants, affordable housing,  crimes, sexoffenders  and safe places.
+
+# 10. dataextraction
+It  contains the scala code for extracting the final results from the HDFS to local.
+
+# 11. Remediation_Code
+We made two applications:
+
+a. To predict  and arrest will happen or not given the following parameters:
+Year, Month, Date, Time(24 hr format), Crime Type,  Crime Description and address of crime.
+we looked at the historical crime data from Chicago and joined this data with other socioeconomic factors and public health.
+We are predicting an arrest and with such analytics we can deploy more police over the unsafe areas and make the streets more safe.
+
+b. To recommend nearby safe places to an end user given an input  as an address. It takes into contch sideration the nearby  clean restaurants, affordable housing, crimes and if the user is a female then the use of sexoffenders list.
+
+# 09. Outputs
+It  contains the screenshots and results of above remediation code
+
+# 12. Extras
+All the intermediate code files or results files.
+
+# 13. issues.md
+List of issues we encountered in the project.
+
+# 14. Papers and ppt
+The papers draft uptil now.
+
+# 15. Bitcoin
+Our midsem project which we had to drop due to issues.
