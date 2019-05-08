@@ -2,7 +2,7 @@
 CSCI-GA.3033-005 - Big Data Application Development
 
 
-We are using the following data to analyse best community to live in Chicago. we have taken into account the following datasets
+## We are using the following data to analyse crime in Chicago and best places to live in Chicago. we have taken into account the following datasets
 
 1. Crimes (Presently Used)[https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2]
 2. Socioeconomic_Indicators (Presently Used) https://data.cityofchicago.org/Health-Human-Services/Census-Data-Selected-socioeconomic-indicators-in-C/kn9c-c2s2
@@ -16,12 +16,36 @@ We are using the following data to analyse best community to live in Chicago. we
 
 All the data can be found on https://data.cityofchicago.org/
 
+## Acknowledgement: 
 
-Acknowledgement: The code to convert latitude and longitude to community area was ideated from this:  
+1. The code to convert latitude and longitude to community area was ideated from this:  
 https://github.com/craigmbooth/chicago_neighborhood_finder
 
+2. A Google Maps geocoding library for Scala
+https://github.com/KoddiDev/geocoder
 
-Team Members:
+
+## Team Members:
+
 1. Sree Lakshmi Addepalli
 2. Divya Juneja
 3. Sree Gowri Addepalli
+
+
+##  Folders and process to run ...
+
+01. Data
+02. DataIngestion
+03. Preprocessing
+04. Cleaning
+05. Profiling
+06. Analytics
+07. Visualisation
+08. DL_Algorithm
+09. Outputs
+10. dataextraction
+11. Remediation_Code
+12. Extras
+13. issues.md
+14. Papers
+15. Bitcoin
