@@ -51,15 +51,22 @@ ii.Still there were few values giving none and not being detected any community.
 
 # 04. Cleaning and Profiling
 The following steps are used for cleaning and preprocessing:
-a. Fill missing values: Ignore/drop the rows having missing values.
-                        If the column is numerical, filled in the missing value with the mean/avg value of the column. 
-                        If the column is categorical, fill in with the most occurring category
-b. Feature Engineering: input data was used to derive new features.(Example Date)
-                        withColumn was used for adding/replacing an existing column
-                        3 udfs were used to generate new features
-                        Binning / Bucketing was used to generate new features
-c. Feature Selection: Correlation analysis was done to get the interdependence between variables and to  drop columns which are highly dependent based on pvalue.
 
+a. Fill missing values: Ignore/drop the rows having missing values.
+
+                        If the column is numerical, filled in the missing value with the mean/avg value of the column. 
+                        
+                        If the column is categorical, fill in with the most occurring category
+                        
+b. Feature Engineering: input data was used to derive new features.(Example Date)
+
+                        withColumn was used for adding/replacing an existing column
+                        
+                        3 udfs were used to generate new features
+                        
+                        Binning / Bucketing was used to generate new features
+                        
+c. Feature Selection: Correlation analysis was done to get the interdependence between variables and to  drop columns which are highly dependent based on pvalue.
 
 # 05. Profiling - Mentioned above
 
@@ -80,7 +87,9 @@ Community Wise Primary Type And Illiteracy
 
 Community Wise Total Vacant Buildings
 
-07. Visualisation
+# 07. Visualisation
+The visualisations of above crime analytics and clusters of restaurants, affordable housing,  crimes, sexoffenders  and safe places.
+
 08. DL_Algorithm
 09. Outputs
 10. dataextraction
