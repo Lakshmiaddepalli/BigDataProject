@@ -34,10 +34,15 @@ https://github.com/KoddiDev/geocoder
 
 ##  Folders and process to run ...
 
-01. Data
-02. DataIngestion
-03. Preprocessing
-04. Cleaning
+# 01. Data
+It contains the datasets used for the project. Some might not be present as they  are  greater than 25 MB
+
+# 02. DataIngestion
+It  contains the scala code for ingesting the datasets into the HDFS
+
+# 03. Preprocessing
+It  contains the scala code for preprocessing the datasets.
+04. Cleani
 05. Profiling
 06. Analytics
 07. Visualisation
