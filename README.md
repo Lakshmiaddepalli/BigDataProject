@@ -38,13 +38,33 @@ https://github.com/KoddiDev/geocoder
 It contains the datasets used for the project. Some might not be present as they  are  greater than 25 MB
 
 # 02. DataIngestion
-It  contains the scala code for ingesting the datasets into the HDFS
+It  contains the scala code for ingesting the datasets into the HDFS.
 
 # 03. Preprocessing
-It  contains the scala code for preprocessing the datasets.
-04. Cleani
-05. Profiling
+It  contains the scala code for preprocessing the datasets. The following methods are done in preprocessing.
+
+The Community Area is an important part of the dataset as it gives values community area wise.After getting the latitude and longitude of the rows which had missing values we applied two procedures:
+
+i.Used the communities areas shape file dataset given by Chicago government and generated a json for range of geopoints for each community. Later we tagged the unknown community area by passing the latitude and longitude.
+
+ii.Still there were few values giving none and not being detected any community. We further went ahead and generated a script which calculated the Euclidean Squared Distance Metric from each community area center and later the nearest community area was set to this row.
+
+# 04. Cleaning and Profiling
+The following steps are used for cleaning and preprocessing:
+a. Fill missing values: Ignore/drop the rows having missing values.
+                        If the column is numerical, filled in the missing value with the mean/avg value of the column. 
+                        If the column is categorical, fill in with the most occurring category
+b. Feature Engineering: input data was used to derive new features.(Example Date)
+                        withColumn was used for adding/replacing an existing column
+                        3 udfs were used to generate new features
+                        Binning / Bucketing was used to generate new features
+c. Feature Selection: Correlation analysis was done to get the interdependence between variables and to  drop columns which are highly dependent based on pvalue.
+
+
+# 05. Profiling - Mentioned above
+
 06. Analytics
+Found 
 07. Visualisation
 08. DL_Algorithm
 09. Outputs
