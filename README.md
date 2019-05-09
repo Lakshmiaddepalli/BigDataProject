@@ -124,6 +124,9 @@ List of issues we encountered in the project.
 
 # 14. Papers and ppt
 The papers draft uptil now.
+https://drive.google.com/file/d/1iWswYLWG_wRtc532N6XWOXUmewQ8SP1C/view?usp=sharing
+https://drive.google.com/file/d/1a3mHz7f5DVtvH3gFASzhiuNGR8NTi9lo/view?usp=sharing
+https://drive.google.com/open?id=1TE6E-aPG6n5MnsdmjYqXBBfspn3yMtRA
 
 # 15. Bitcoin
 Our midsem project which we had to drop due to issues.
