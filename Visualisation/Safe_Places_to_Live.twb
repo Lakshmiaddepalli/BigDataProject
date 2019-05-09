@@ -14,641 +14,6 @@
     <preference name='ui.shelf.height' value='26' />
   </preferences>
   <datasources>
-    <datasource caption='restaurantsclusterlist' inline='true' name='federated.1a3en4g15gkzk5145lyus0naus00' version='18.1'>
-      <connection class='federated'>
-        <named-connections>
-          <named-connection caption='restaurantsclusterlist' name='textscan.1os05cz088xwoa1fssa341vskuy1'>
-            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='restaurantsclusterlist.csv' password='' server='' workgroup-auth-mode='as-is' />
-          </named-connection>
-        </named-connections>
-        <relation connection='textscan.1os05cz088xwoa1fssa341vskuy1' name='restaurantsclusterlist.csv' table='[restaurantsclusterlist#csv]' type='table'>
-          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-            <column datatype='string' name='Restaurant Clusters' ordinal='0' />
-            <column datatype='real' name='Latitude' ordinal='1' />
-            <column datatype='real' name='Longitude' ordinal='2' />
-            <column datatype='integer' name='Count' ordinal='3' />
-          </columns>
-        </relation>
-        <refresh increment-key='' incremental-updates='false' />
-        <metadata-records>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[restaurantsclusterlist.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
-              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
-              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
-              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
-              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
-              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
-              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
-              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Restaurant Clusters</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Restaurant Clusters]</local-name>
-            <parent-name>[restaurantsclusterlist.csv]</parent-name>
-            <remote-alias>Restaurant Clusters</remote-alias>
-            <ordinal>0</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Latitude</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[Latitude]</local-name>
-            <parent-name>[restaurantsclusterlist.csv]</parent-name>
-            <remote-alias>Latitude</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Longitude</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[Longitude]</local-name>
-            <parent-name>[restaurantsclusterlist.csv]</parent-name>
-            <remote-alias>Longitude</remote-alias>
-            <ordinal>2</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Count</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Count]</local-name>
-            <parent-name>[restaurantsclusterlist.csv]</parent-name>
-            <remote-alias>Count</remote-alias>
-            <ordinal>3</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-        </metadata-records>
-      </connection>
-      <column aggregation='Avg' datatype='real' name='[Latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
-      <column aggregation='Avg' datatype='real' name='[Longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
-      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
-        <calculation class='tableau' formula='1' />
-      </column>
-      <extract count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/restaurantsclusterlist.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:28:28 AM' username='tableau_internal_user'>
-          <relation name='Extract' table='[Extract].[Extract]' type='table' />
-          <refresh increment-key='' incremental-updates='false'>
-            <refresh-event add-from-file-path='restaurantsclusterlist' increment-value='%null%' refresh-type='create' rows-inserted='300' timestamp-start='2019-05-08 07:28:28.073' />
-          </refresh>
-          <metadata-records>
-            <metadata-record class='column'>
-              <remote-name>Restaurant Clusters</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[Restaurant Clusters]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Restaurant Clusters</remote-alias>
-              <ordinal>0</ordinal>
-              <family>restaurantsclusterlist.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>300</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LEN_RGB' />
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Latitude</remote-name>
-              <remote-type>5</remote-type>
-              <local-name>[Latitude]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Latitude</remote-alias>
-              <ordinal>1</ordinal>
-              <family>restaurantsclusterlist.csv</family>
-              <local-type>real</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>300</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Longitude</remote-name>
-              <remote-type>5</remote-type>
-              <local-name>[Longitude]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Longitude</remote-alias>
-              <ordinal>2</ordinal>
-              <family>restaurantsclusterlist.csv</family>
-              <local-type>real</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>300</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Count</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[Count]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Count</remote-alias>
-              <ordinal>3</ordinal>
-              <family>restaurantsclusterlist.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>113</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-          </metadata-records>
-        </connection>
-      </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.307087' measure-ordering='alphabetic' measure-percentage='0.692913' show-structure='true' />
-      <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
-      </semantic-values>
-    </datasource>
-    <datasource caption='affordablehouseclusterlist' inline='true' name='federated.1jxr4ni15u799w130rf6c0dmk4go' version='18.1'>
-      <connection class='federated'>
-        <named-connections>
-          <named-connection caption='affordablehouseclusterlist' name='textscan.0gjqp9h1qgbylo1aebfcq1xd2m4q'>
-            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='affordablehouseclusterlist.csv' password='' server='' workgroup-auth-mode='as-is' />
-          </named-connection>
-        </named-connections>
-        <relation connection='textscan.0gjqp9h1qgbylo1aebfcq1xd2m4q' name='affordablehouseclusterlist.csv' table='[affordablehouseclusterlist#csv]' type='table'>
-          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-            <column datatype='string' name='Affordable Housing Clusters' ordinal='0' />
-            <column datatype='real' name='Latitude' ordinal='1' />
-            <column datatype='real' name='Longitude' ordinal='2' />
-            <column datatype='integer' name='Count' ordinal='3' />
-          </columns>
-        </relation>
-        <refresh increment-key='' incremental-updates='false' />
-        <metadata-records>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[affordablehouseclusterlist.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
-              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
-              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
-              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
-              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
-              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
-              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
-              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Affordable Housing Clusters</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Affordable Housing Clusters]</local-name>
-            <parent-name>[affordablehouseclusterlist.csv]</parent-name>
-            <remote-alias>Affordable Housing Clusters</remote-alias>
-            <ordinal>0</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Latitude</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[Latitude]</local-name>
-            <parent-name>[affordablehouseclusterlist.csv]</parent-name>
-            <remote-alias>Latitude</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Longitude</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[Longitude]</local-name>
-            <parent-name>[affordablehouseclusterlist.csv]</parent-name>
-            <remote-alias>Longitude</remote-alias>
-            <ordinal>2</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Count</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Count]</local-name>
-            <parent-name>[affordablehouseclusterlist.csv]</parent-name>
-            <remote-alias>Count</remote-alias>
-            <ordinal>3</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-        </metadata-records>
-      </connection>
-      <column aggregation='Avg' datatype='real' name='[Latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
-      <column aggregation='Avg' datatype='real' name='[Longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
-      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
-        <calculation class='tableau' formula='1' />
-      </column>
-      <extract count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/affordablehouseclusterlist.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:23:35 AM' username='tableau_internal_user'>
-          <relation name='Extract' table='[Extract].[Extract]' type='table' />
-          <refresh increment-key='' incremental-updates='false'>
-            <refresh-event add-from-file-path='affordablehouseclusterlist' increment-value='%null%' refresh-type='create' rows-inserted='300' timestamp-start='2019-05-08 07:23:35.081' />
-          </refresh>
-          <metadata-records>
-            <metadata-record class='column'>
-              <remote-name>Affordable Housing Clusters</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[Affordable Housing Clusters]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Affordable Housing Clusters</remote-alias>
-              <ordinal>0</ordinal>
-              <family>affordablehouseclusterlist.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>300</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LEN_RGB' />
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Latitude</remote-name>
-              <remote-type>5</remote-type>
-              <local-name>[Latitude]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Latitude</remote-alias>
-              <ordinal>1</ordinal>
-              <family>affordablehouseclusterlist.csv</family>
-              <local-type>real</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>300</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Longitude</remote-name>
-              <remote-type>5</remote-type>
-              <local-name>[Longitude]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Longitude</remote-alias>
-              <ordinal>2</ordinal>
-              <family>affordablehouseclusterlist.csv</family>
-              <local-type>real</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>300</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Count</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[Count]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Count</remote-alias>
-              <ordinal>3</ordinal>
-              <family>affordablehouseclusterlist.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>6</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-          </metadata-records>
-        </connection>
-      </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.433054' measure-ordering='alphabetic' measure-percentage='0.566946' show-structure='true' />
-      <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
-      </semantic-values>
-    </datasource>
-    <datasource caption='sexoffendersclusterlist' inline='true' name='federated.13gcysr1lirajq1doixsn1u1buz2' version='18.1'>
-      <connection class='federated'>
-        <named-connections>
-          <named-connection caption='sexoffendersclusterlist' name='textscan.1ordast081vofv16l05qa0oks668'>
-            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='sexoffendersclusterlist.csv' password='' server='' workgroup-auth-mode='as-is' />
-          </named-connection>
-        </named-connections>
-        <relation connection='textscan.1ordast081vofv16l05qa0oks668' name='sexoffendersclusterlist.csv' table='[sexoffendersclusterlist#csv]' type='table'>
-          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-            <column datatype='string' name='Cluster Points' ordinal='0' />
-            <column datatype='real' name='Latitude' ordinal='1' />
-            <column datatype='real' name='Longitude' ordinal='2' />
-            <column datatype='integer' name='Count' ordinal='3' />
-          </columns>
-        </relation>
-        <refresh increment-key='' incremental-updates='false' />
-        <metadata-records>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[sexoffendersclusterlist.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
-              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
-              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
-              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
-              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
-              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
-              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
-              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Cluster Points</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Cluster Points]</local-name>
-            <parent-name>[sexoffendersclusterlist.csv]</parent-name>
-            <remote-alias>Cluster Points</remote-alias>
-            <ordinal>0</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Latitude</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[Latitude]</local-name>
-            <parent-name>[sexoffendersclusterlist.csv]</parent-name>
-            <remote-alias>Latitude</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Longitude</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[Longitude]</local-name>
-            <parent-name>[sexoffendersclusterlist.csv]</parent-name>
-            <remote-alias>Longitude</remote-alias>
-            <ordinal>2</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Count</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Count]</local-name>
-            <parent-name>[sexoffendersclusterlist.csv]</parent-name>
-            <remote-alias>Count</remote-alias>
-            <ordinal>3</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-        </metadata-records>
-      </connection>
-      <column aggregation='Avg' datatype='real' name='[Latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
-      <column aggregation='Avg' datatype='real' name='[Longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
-      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
-        <calculation class='tableau' formula='1' />
-      </column>
-      <extract count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/sexoffendersclusterlist.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:29:22 AM' username='tableau_internal_user'>
-          <relation name='Extract' table='[Extract].[Extract]' type='table' />
-          <refresh increment-key='' incremental-updates='false'>
-            <refresh-event add-from-file-path='sexoffendersclusterlist' increment-value='%null%' refresh-type='create' rows-inserted='300' timestamp-start='2019-05-08 07:29:22.051' />
-          </refresh>
-          <metadata-records>
-            <metadata-record class='column'>
-              <remote-name>Cluster Points</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[Cluster Points]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Cluster Points</remote-alias>
-              <ordinal>0</ordinal>
-              <family>sexoffendersclusterlist.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>300</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LEN_RGB' />
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Latitude</remote-name>
-              <remote-type>5</remote-type>
-              <local-name>[Latitude]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Latitude</remote-alias>
-              <ordinal>1</ordinal>
-              <family>sexoffendersclusterlist.csv</family>
-              <local-type>real</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>300</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Longitude</remote-name>
-              <remote-type>5</remote-type>
-              <local-name>[Longitude]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Longitude</remote-alias>
-              <ordinal>2</ordinal>
-              <family>sexoffendersclusterlist.csv</family>
-              <local-type>real</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>300</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Count</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[Count]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Count</remote-alias>
-              <ordinal>3</ordinal>
-              <family>sexoffendersclusterlist.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>17</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-          </metadata-records>
-        </connection>
-      </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.4375' measure-ordering='alphabetic' measure-percentage='0.5625' show-structure='true' />
-      <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
-      </semantic-values>
-    </datasource>
-    <datasource caption='safecluster' inline='true' name='federated.1ga9tqu1ys15fz1euvzps164tt1c' version='18.1'>
-      <connection class='federated'>
-        <named-connections>
-          <named-connection caption='safecluster' name='textscan.15yt3wl1y8pu781e0palv1q4nzul'>
-            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='safecluster.csv' password='' server='' workgroup-auth-mode='as-is' />
-          </named-connection>
-        </named-connections>
-        <relation connection='textscan.15yt3wl1y8pu781e0palv1q4nzul' name='safecluster.csv' table='[safecluster#csv]' type='table'>
-          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-            <column datatype='string' name='Safe Clusters' ordinal='0' />
-            <column datatype='real' name='Latitude' ordinal='1' />
-            <column datatype='real' name='Longitude' ordinal='2' />
-            <column datatype='integer' name='Count' ordinal='3' />
-          </columns>
-        </relation>
-        <metadata-records>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[safecluster.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
-              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
-              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
-              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
-              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
-              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
-              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
-              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Safe Clusters</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Safe Clusters]</local-name>
-            <parent-name>[safecluster.csv]</parent-name>
-            <remote-alias>Safe Clusters</remote-alias>
-            <ordinal>0</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Latitude</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[Latitude]</local-name>
-            <parent-name>[safecluster.csv]</parent-name>
-            <remote-alias>Latitude</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Longitude</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[Longitude]</local-name>
-            <parent-name>[safecluster.csv]</parent-name>
-            <remote-alias>Longitude</remote-alias>
-            <ordinal>2</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Count</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Count]</local-name>
-            <parent-name>[safecluster.csv]</parent-name>
-            <remote-alias>Count</remote-alias>
-            <ordinal>3</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-        </metadata-records>
-      </connection>
-      <column aggregation='Avg' datatype='real' name='[Latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
-      <column aggregation='Avg' datatype='real' name='[Longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
-      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
-        <calculation class='tableau' formula='1' />
-      </column>
-      <extract count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/safecluster.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:28:51 AM' username='tableau_internal_user'>
-          <relation name='Extract' table='[Extract].[Extract]' type='table' />
-          <refresh>
-            <refresh-event add-from-file-path='safecluster' increment-value='%null%' refresh-type='create' rows-inserted='112' timestamp-start='2019-05-08 07:28:51.480' />
-          </refresh>
-          <metadata-records>
-            <metadata-record class='column'>
-              <remote-name>Safe Clusters</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[Safe Clusters]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Safe Clusters</remote-alias>
-              <ordinal>0</ordinal>
-              <family>safecluster.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>112</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LEN_RGB' />
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Latitude</remote-name>
-              <remote-type>5</remote-type>
-              <local-name>[Latitude]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Latitude</remote-alias>
-              <ordinal>1</ordinal>
-              <family>safecluster.csv</family>
-              <local-type>real</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>112</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Longitude</remote-name>
-              <remote-type>5</remote-type>
-              <local-name>[Longitude]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Longitude</remote-alias>
-              <ordinal>2</ordinal>
-              <family>safecluster.csv</family>
-              <local-type>real</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>112</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Count</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[Count]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Count</remote-alias>
-              <ordinal>3</ordinal>
-              <family>safecluster.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>6</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-          </metadata-records>
-        </connection>
-      </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.439453' measure-ordering='alphabetic' measure-percentage='0.560547' show-structure='true' />
-      <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
-      </semantic-values>
-    </datasource>
     <datasource caption='cn' inline='true' name='federated.0eei9621p691v915uvo0o0qvtvbd' version='18.1'>
       <connection class='federated'>
         <named-connections>
@@ -999,258 +364,7 @@
       </column>
       <column aggregation='Hour' datatype='datetime' name='[Time]' role='dimension' type='ordinal' />
       <column datatype='integer' name='[Year]' role='dimension' type='quantitative' />
-      <layout dim-ordering='alphabetic' dim-percentage='0.55814' measure-ordering='alphabetic' measure-percentage='0.44186' show-structure='true' />
-      <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
-      </semantic-values>
-    </datasource>
-    <datasource caption='cwp.csv+ (Multiple Connections)' inline='true' name='federated.14g5xpr05bjwwl12vbyzl1r60q38' version='18.1'>
-      <connection class='federated'>
-        <named-connections>
-          <named-connection caption='cwp' name='textscan.0cpv7y30h6gcoh10200300qkphxt'>
-            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='cwp.csv' password='' server='' />
-          </named-connection>
-          <named-connection caption='communitymapping' name='textscan.0yd46k61yg7lcc15i0dp90m6ulg0'>
-            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/CrimeData' filename='communitymapping.csv' password='' server='' />
-          </named-connection>
-        </named-connections>
-        <relation join='inner' type='join'>
-          <clause type='join'>
-            <expression op='='>
-              <expression op='[cwp.csv].[Community Area]' />
-              <expression op='[communitymapping.csv].[Community Area Number]' />
-            </expression>
-          </clause>
-          <relation connection='textscan.0cpv7y30h6gcoh10200300qkphxt' name='cwp.csv' table='[cwp#csv]' type='table'>
-            <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-              <column datatype='integer' name='Community Area' ordinal='0' />
-              <column datatype='boolean' name='Arrest' ordinal='1' />
-              <column datatype='real' name='PERCENT HOUSEHOLDS BELOW POVERTY' ordinal='2' />
-              <column datatype='integer' name='count' ordinal='3' />
-            </columns>
-          </relation>
-          <relation connection='textscan.0yd46k61yg7lcc15i0dp90m6ulg0' name='communitymapping.csv' table='[communitymapping#csv]' type='table'>
-            <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-              <column datatype='integer' name='Community Area Number' ordinal='0' />
-              <column datatype='string' name='COMMUNITY AREA NAME' ordinal='1' />
-            </columns>
-          </relation>
-        </relation>
-        <refresh increment-key='' incremental-updates='false' />
-        <metadata-records>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[cwp.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
-              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
-              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
-              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
-              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
-              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
-              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Community Area</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Community Area]</local-name>
-            <parent-name>[cwp.csv]</parent-name>
-            <remote-alias>Community Area</remote-alias>
-            <ordinal>0</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Arrest</remote-name>
-            <remote-type>11</remote-type>
-            <local-name>[Arrest]</local-name>
-            <parent-name>[cwp.csv]</parent-name>
-            <remote-alias>Arrest</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>boolean</local-type>
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>PERCENT HOUSEHOLDS BELOW POVERTY</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[PERCENT HOUSEHOLDS BELOW POVERTY]</local-name>
-            <parent-name>[cwp.csv]</parent-name>
-            <remote-alias>PERCENT HOUSEHOLDS BELOW POVERTY</remote-alias>
-            <ordinal>2</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>count</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[count]</local-name>
-            <parent-name>[cwp.csv]</parent-name>
-            <remote-alias>count</remote-alias>
-            <ordinal>3</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[communitymapping.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
-              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
-              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
-              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
-              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
-              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
-              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
-              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Community Area Number</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Community Area Number]</local-name>
-            <parent-name>[communitymapping.csv]</parent-name>
-            <remote-alias>Community Area Number</remote-alias>
-            <ordinal>4</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>COMMUNITY AREA NAME</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[COMMUNITY AREA NAME]</local-name>
-            <parent-name>[communitymapping.csv]</parent-name>
-            <remote-alias>COMMUNITY AREA NAME</remote-alias>
-            <ordinal>5</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-          </metadata-record>
-        </metadata-records>
-      </connection>
-      <aliases enabled='yes' />
-      <column caption='Community Area Name' datatype='string' name='[COMMUNITY AREA NAME]' role='dimension' type='nominal' />
-      <column datatype='integer' name='[Community Area Number]' role='measure' type='ordinal' />
-      <column datatype='integer' hidden='true' name='[Community Area]' role='measure' type='quantitative' />
-      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
-        <calculation class='tableau' formula='1' />
-      </column>
-      <column caption='Percent Households Below Poverty' datatype='real' name='[PERCENT HOUSEHOLDS BELOW POVERTY]' role='measure' type='quantitative' />
-      <column caption='Count' datatype='integer' name='[count]' role='measure' type='quantitative' />
-      <column-instance column='[PERCENT HOUSEHOLDS BELOW POVERTY]' derivation='Sum' name='[sum:PERCENT HOUSEHOLDS BELOW POVERTY:qk]' pivot='key' type='quantitative' />
-      <column-instance column='[count]' derivation='Sum' name='[sum:count:qk]' pivot='key' type='quantitative' />
-      <extract count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/CommunityAreaPovertyArrests.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:47:43 AM' username='tableau_internal_user'>
-          <relation name='Extract' table='[Extract].[Extract]' type='table' />
-          <refresh increment-key='' incremental-updates='false'>
-            <refresh-event add-from-file-path='cwp.csv+ (Multiple Connections)' increment-value='%null%' refresh-type='create' rows-inserted='76' timestamp-start='2019-05-08 07:47:43.834' />
-          </refresh>
-          <metadata-records>
-            <metadata-record class='column'>
-              <remote-name>Arrest</remote-name>
-              <remote-type>11</remote-type>
-              <local-name>[Arrest]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Arrest</remote-alias>
-              <ordinal>0</ordinal>
-              <family>cwp.csv</family>
-              <local-type>boolean</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>1</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>PERCENT HOUSEHOLDS BELOW POVERTY</remote-name>
-              <remote-type>5</remote-type>
-              <local-name>[PERCENT HOUSEHOLDS BELOW POVERTY]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>PERCENT HOUSEHOLDS BELOW POVERTY</remote-alias>
-              <ordinal>1</ordinal>
-              <family>cwp.csv</family>
-              <local-type>real</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>66</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>count</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[count]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>count</remote-alias>
-              <ordinal>2</ordinal>
-              <family>cwp.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>76</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Community Area Number</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[Community Area Number]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Community Area Number</remote-alias>
-              <ordinal>3</ordinal>
-              <family>communitymapping.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>76</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>COMMUNITY AREA NAME</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[COMMUNITY AREA NAME]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>COMMUNITY AREA NAME</remote-alias>
-              <ordinal>4</ordinal>
-              <family>communitymapping.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>76</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LEN_RGB' />
-            </metadata-record>
-          </metadata-records>
-        </connection>
-      </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.418103' measure-ordering='alphabetic' measure-percentage='0.581897' show-structure='true' />
-      <style>
-        <style-rule element='mark'>
-          <encoding attr='color' field='[:Measure Names]' type='palette'>
-            <map to='#4e79a7'>
-              <bucket>&quot;[federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:count:qk]&quot;</bucket>
-            </map>
-            <map to='#e15759'>
-              <bucket>&quot;[federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:PERCENT HOUSEHOLDS BELOW POVERTY:qk]:1&quot;</bucket>
-            </map>
-            <map to='#f28e2b'>
-              <bucket>&quot;[federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:PERCENT HOUSEHOLDS BELOW POVERTY:qk]&quot;</bucket>
-            </map>
-          </encoding>
-        </style-rule>
-      </style>
+      <layout dim-ordering='alphabetic' dim-percentage='0.511811' measure-ordering='alphabetic' measure-percentage='0.488189' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
       </semantic-values>
@@ -1272,44 +386,41 @@
         <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
       </semantic-values>
     </datasource>
-    <datasource caption='cz2.csv+ (Multiple Connections)' inline='true' name='federated.0dpam5s0filj4y17fhu4x0rtr6qx' version='18.1'>
+    <datasource caption='RecommendedPlaces' inline='true' name='federated.0hfqou71e2uvis113epui0jincap' version='18.1'>
       <connection class='federated'>
         <named-connections>
-          <named-connection caption='cz2' name='textscan.0i5bebf0w8t4q811xgma70cyse1z'>
-            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='cz2.csv' password='' server='' />
-          </named-connection>
-          <named-connection caption='communitymapping' name='textscan.0drehe21viqrx51fkzeve07gnu4z'>
-            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/CrimeData' filename='communitymapping.csv' password='' server='' />
+          <named-connection caption='RecommendedPlaces' name='textscan.0s9fvnp0gruyej10h8qnz10nf2lz'>
+            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='RecommendedPlaces.csv' password='' server='' />
           </named-connection>
         </named-connections>
-        <relation join='inner' type='join'>
-          <clause type='join'>
-            <expression op='='>
-              <expression op='[cz2.csv].[Community Area]' />
-              <expression op='[communitymapping.csv].[Community Area Number]' />
-            </expression>
-          </clause>
-          <relation connection='textscan.0i5bebf0w8t4q811xgma70cyse1z' name='cz2.csv' table='[cz2#csv]' type='table'>
-            <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-              <column datatype='integer' name='Community Area' ordinal='0' />
-              <column datatype='string' name='Primary Type' ordinal='1' />
-              <column datatype='real' name='PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA' ordinal='2' />
-              <column datatype='integer' name='count' ordinal='3' />
-            </columns>
-          </relation>
-          <relation connection='textscan.0drehe21viqrx51fkzeve07gnu4z' name='communitymapping.csv' table='[communitymapping#csv]' type='table'>
-            <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-              <column datatype='integer' name='Community Area Number' ordinal='0' />
-              <column datatype='string' name='COMMUNITY AREA NAME' ordinal='1' />
-            </columns>
-          </relation>
+      </connection>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.5' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='RecommendedPlaces (2)' inline='true' name='federated.0i2xgel0mnrpo11b18i3204j2p1t' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='RecommendedPlaces' name='textscan.0ulillp02qug5z16law8018epy7o'>
+            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='RecommendedPlaces.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.0ulillp02qug5z16law8018epy7o' name='RecommendedPlaces.csv' table='[RecommendedPlaces#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+            <column datatype='string' name='Address' ordinal='0' />
+            <column datatype='real' name='Latitude' ordinal='1' />
+            <column datatype='real' name='Longitude' ordinal='2' />
+          </columns>
         </relation>
-        <refresh increment-key='' incremental-updates='false' />
         <metadata-records>
           <metadata-record class='capability'>
             <remote-name />
             <remote-type>0</remote-type>
-            <parent-name>[cz2.csv]</parent-name>
+            <parent-name>[RecommendedPlaces.csv]</parent-name>
             <remote-alias />
             <aggregation>Count</aggregation>
             <contains-null>true</contains-null>
@@ -1326,23 +437,12 @@
             </attributes>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>Community Area</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Community Area]</local-name>
-            <parent-name>[cz2.csv]</parent-name>
-            <remote-alias>Community Area</remote-alias>
-            <ordinal>0</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Primary Type</remote-name>
+            <remote-name>Address</remote-name>
             <remote-type>129</remote-type>
-            <local-name>[Primary Type]</local-name>
-            <parent-name>[cz2.csv]</parent-name>
-            <remote-alias>Primary Type</remote-alias>
-            <ordinal>1</ordinal>
+            <local-name>[Address]</local-name>
+            <parent-name>[RecommendedPlaces.csv]</parent-name>
+            <remote-alias>Address</remote-alias>
+            <ordinal>0</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1351,186 +451,35 @@
             <collation flag='0' name='LEN_RGB' />
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-name>
+            <remote-name>Latitude</remote-name>
             <remote-type>5</remote-type>
-            <local-name>[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]</local-name>
-            <parent-name>[cz2.csv]</parent-name>
-            <remote-alias>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-alias>
-            <ordinal>2</ordinal>
+            <local-name>[Latitude]</local-name>
+            <parent-name>[RecommendedPlaces.csv]</parent-name>
+            <remote-alias>Latitude</remote-alias>
+            <ordinal>1</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>count</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[count]</local-name>
-            <parent-name>[cz2.csv]</parent-name>
-            <remote-alias>count</remote-alias>
-            <ordinal>3</ordinal>
-            <local-type>integer</local-type>
+            <remote-name>Longitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Longitude]</local-name>
+            <parent-name>[RecommendedPlaces.csv]</parent-name>
+            <remote-alias>Longitude</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[communitymapping.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
-              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
-              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
-              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
-              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
-              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
-              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
-              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Community Area Number</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Community Area Number]</local-name>
-            <parent-name>[communitymapping.csv]</parent-name>
-            <remote-alias>Community Area Number</remote-alias>
-            <ordinal>4</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>COMMUNITY AREA NAME</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[COMMUNITY AREA NAME]</local-name>
-            <parent-name>[communitymapping.csv]</parent-name>
-            <remote-alias>COMMUNITY AREA NAME</remote-alias>
-            <ordinal>5</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
           </metadata-record>
         </metadata-records>
       </connection>
-      <aliases enabled='yes' />
-      <column caption='Community Area Name' datatype='string' name='[COMMUNITY AREA NAME]' role='dimension' type='nominal' />
+      <column aggregation='Avg' datatype='real' name='[Latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+      <column aggregation='Avg' datatype='real' name='[Longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
       <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
         <calculation class='tableau' formula='1' />
       </column>
-      <column caption='Percent Aged 25+ Without High School Diploma' datatype='real' name='[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]' role='measure' type='quantitative' />
-      <column caption='Count' datatype='integer' name='[count]' role='measure' type='quantitative' />
-      <column-instance column='[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]' derivation='Sum' name='[sum:PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA:qk]' pivot='key' type='quantitative' />
-      <column-instance column='[count]' derivation='Sum' name='[sum:count:qk]' pivot='key' type='quantitative' />
-      <extract count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/cz2.csv+ (Multiple Connections).hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:56:43 PM' username='tableau_internal_user'>
-          <relation name='Extract' table='[Extract].[Extract]' type='table' />
-          <refresh increment-key='' incremental-updates='false'>
-            <refresh-event add-from-file-path='cz2.csv+ (Multiple Connections)' increment-value='%null%' refresh-type='create' rows-inserted='1923' timestamp-start='2019-05-08 19:56:43.481' />
-          </refresh>
-          <metadata-records>
-            <metadata-record class='column'>
-              <remote-name>Community Area</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[Community Area]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Community Area</remote-alias>
-              <ordinal>0</ordinal>
-              <family>cz2.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>77</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Primary Type</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[Primary Type]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Primary Type</remote-alias>
-              <ordinal>1</ordinal>
-              <family>cz2.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>29</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LEN_RGB' />
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-name>
-              <remote-type>5</remote-type>
-              <local-name>[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-alias>
-              <ordinal>2</ordinal>
-              <family>cz2.csv</family>
-              <local-type>real</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>69</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>count</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[count]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>count</remote-alias>
-              <ordinal>3</ordinal>
-              <family>cz2.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>550</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>Community Area Number</remote-name>
-              <remote-type>20</remote-type>
-              <local-name>[Community Area Number]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>Community Area Number</remote-alias>
-              <ordinal>4</ordinal>
-              <family>communitymapping.csv</family>
-              <local-type>integer</local-type>
-              <aggregation>Sum</aggregation>
-              <approx-count>77</approx-count>
-              <contains-null>true</contains-null>
-            </metadata-record>
-            <metadata-record class='column'>
-              <remote-name>COMMUNITY AREA NAME</remote-name>
-              <remote-type>129</remote-type>
-              <local-name>[COMMUNITY AREA NAME]</local-name>
-              <parent-name>[Extract]</parent-name>
-              <remote-alias>COMMUNITY AREA NAME</remote-alias>
-              <ordinal>5</ordinal>
-              <family>communitymapping.csv</family>
-              <local-type>string</local-type>
-              <aggregation>Count</aggregation>
-              <approx-count>77</approx-count>
-              <contains-null>true</contains-null>
-              <collation flag='0' name='LEN_RGB' />
-            </metadata-record>
-          </metadata-records>
-        </connection>
-      </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.372781' measure-ordering='alphabetic' measure-percentage='0.627219' show-structure='true' />
-      <style>
-        <style-rule element='mark'>
-          <encoding attr='color' field='[:Measure Names]' type='palette'>
-            <map to='#4e79a7'>
-              <bucket>&quot;[federated.0dpam5s0filj4y17fhu4x0rtr6qx].[sum:count:qk]&quot;</bucket>
-            </map>
-            <map to='#f28e2b'>
-              <bucket>&quot;[federated.0dpam5s0filj4y17fhu4x0rtr6qx].[sum:PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA:qk]&quot;</bucket>
-            </map>
-          </encoding>
-        </style-rule>
-      </style>
+      <layout dim-ordering='alphabetic' dim-percentage='0.393701' measure-ordering='alphabetic' measure-percentage='0.606299' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
       </semantic-values>
@@ -1778,7 +727,7 @@
           </metadata-records>
         </connection>
       </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.413699' measure-ordering='alphabetic' measure-percentage='0.586301' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.302885' measure-ordering='alphabetic' measure-percentage='0.697115' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
       </semantic-values>
@@ -2044,7 +993,7 @@
           </metadata-records>
         </connection>
       </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.419689' measure-ordering='alphabetic' measure-percentage='0.580311' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.552885' measure-ordering='alphabetic' measure-percentage='0.447115' show-structure='true' />
       <style>
         <style-rule element='mark'>
           <encoding attr='color' field='[:Measure Names]' type='palette'>
@@ -2067,41 +1016,44 @@
         <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
       </semantic-values>
     </datasource>
-    <datasource caption='RecommendedPlaces' inline='true' name='federated.0hfqou71e2uvis113epui0jincap' version='18.1'>
+    <datasource caption='cwp.csv+ (Multiple Connections)' inline='true' name='federated.14g5xpr05bjwwl12vbyzl1r60q38' version='18.1'>
       <connection class='federated'>
         <named-connections>
-          <named-connection caption='RecommendedPlaces' name='textscan.0s9fvnp0gruyej10h8qnz10nf2lz'>
-            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='RecommendedPlaces.csv' password='' server='' />
+          <named-connection caption='cwp' name='textscan.0cpv7y30h6gcoh10200300qkphxt'>
+            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='cwp.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='communitymapping' name='textscan.0yd46k61yg7lcc15i0dp90m6ulg0'>
+            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/CrimeData' filename='communitymapping.csv' password='' server='' />
           </named-connection>
         </named-connections>
-      </connection>
-      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
-        <calculation class='tableau' formula='1' />
-      </column>
-      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.5' show-structure='true' />
-      <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
-      </semantic-values>
-    </datasource>
-    <datasource caption='RecommendedPlaces (2)' inline='true' name='federated.0i2xgel0mnrpo11b18i3204j2p1t' version='18.1'>
-      <connection class='federated'>
-        <named-connections>
-          <named-connection caption='RecommendedPlaces' name='textscan.0ulillp02qug5z16law8018epy7o'>
-            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='RecommendedPlaces.csv' password='' server='' />
-          </named-connection>
-        </named-connections>
-        <relation connection='textscan.0ulillp02qug5z16law8018epy7o' name='RecommendedPlaces.csv' table='[RecommendedPlaces#csv]' type='table'>
-          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-            <column datatype='string' name='Address' ordinal='0' />
-            <column datatype='real' name='Latitude' ordinal='1' />
-            <column datatype='real' name='Longitude' ordinal='2' />
-          </columns>
+        <relation join='inner' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[cwp.csv].[Community Area]' />
+              <expression op='[communitymapping.csv].[Community Area Number]' />
+            </expression>
+          </clause>
+          <relation connection='textscan.0cpv7y30h6gcoh10200300qkphxt' name='cwp.csv' table='[cwp#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+              <column datatype='integer' name='Community Area' ordinal='0' />
+              <column datatype='boolean' name='Arrest' ordinal='1' />
+              <column datatype='real' name='PERCENT HOUSEHOLDS BELOW POVERTY' ordinal='2' />
+              <column datatype='integer' name='count' ordinal='3' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0yd46k61yg7lcc15i0dp90m6ulg0' name='communitymapping.csv' table='[communitymapping#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+              <column datatype='integer' name='Community Area Number' ordinal='0' />
+              <column datatype='string' name='COMMUNITY AREA NAME' ordinal='1' />
+            </columns>
+          </relation>
         </relation>
+        <refresh increment-key='' incremental-updates='false' />
         <metadata-records>
           <metadata-record class='capability'>
             <remote-name />
             <remote-type>0</remote-type>
-            <parent-name>[RecommendedPlaces.csv]</parent-name>
+            <parent-name>[cwp.csv]</parent-name>
             <remote-alias />
             <aggregation>Count</aggregation>
             <contains-null>true</contains-null>
@@ -2118,11 +1070,245 @@
             </attributes>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>Address</remote-name>
+            <remote-name>Community Area</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Community Area]</local-name>
+            <parent-name>[cwp.csv]</parent-name>
+            <remote-alias>Community Area</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Arrest</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[Arrest]</local-name>
+            <parent-name>[cwp.csv]</parent-name>
+            <remote-alias>Arrest</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PERCENT HOUSEHOLDS BELOW POVERTY</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[PERCENT HOUSEHOLDS BELOW POVERTY]</local-name>
+            <parent-name>[cwp.csv]</parent-name>
+            <remote-alias>PERCENT HOUSEHOLDS BELOW POVERTY</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>count</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[count]</local-name>
+            <parent-name>[cwp.csv]</parent-name>
+            <remote-alias>count</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[communitymapping.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
+              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Community Area Number</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Community Area Number]</local-name>
+            <parent-name>[communitymapping.csv]</parent-name>
+            <remote-alias>Community Area Number</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>COMMUNITY AREA NAME</remote-name>
             <remote-type>129</remote-type>
-            <local-name>[Address]</local-name>
-            <parent-name>[RecommendedPlaces.csv]</parent-name>
-            <remote-alias>Address</remote-alias>
+            <local-name>[COMMUNITY AREA NAME]</local-name>
+            <parent-name>[communitymapping.csv]</parent-name>
+            <remote-alias>COMMUNITY AREA NAME</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Community Area Name' datatype='string' name='[COMMUNITY AREA NAME]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[Community Area Number]' role='measure' type='ordinal' />
+      <column datatype='integer' hidden='true' name='[Community Area]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Percent Households Below Poverty' datatype='real' name='[PERCENT HOUSEHOLDS BELOW POVERTY]' role='measure' type='quantitative' />
+      <column caption='Count' datatype='integer' name='[count]' role='measure' type='quantitative' />
+      <column-instance column='[PERCENT HOUSEHOLDS BELOW POVERTY]' derivation='Sum' name='[sum:PERCENT HOUSEHOLDS BELOW POVERTY:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[count]' derivation='Sum' name='[sum:count:qk]' pivot='key' type='quantitative' />
+      <extract count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/CommunityAreaPovertyArrests.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:47:43 AM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh increment-key='' incremental-updates='false'>
+            <refresh-event add-from-file-path='cwp.csv+ (Multiple Connections)' increment-value='%null%' refresh-type='create' rows-inserted='76' timestamp-start='2019-05-08 07:47:43.834' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>Arrest</remote-name>
+              <remote-type>11</remote-type>
+              <local-name>[Arrest]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Arrest</remote-alias>
+              <ordinal>0</ordinal>
+              <family>cwp.csv</family>
+              <local-type>boolean</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>PERCENT HOUSEHOLDS BELOW POVERTY</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[PERCENT HOUSEHOLDS BELOW POVERTY]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>PERCENT HOUSEHOLDS BELOW POVERTY</remote-alias>
+              <ordinal>1</ordinal>
+              <family>cwp.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>66</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>count</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[count]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>count</remote-alias>
+              <ordinal>2</ordinal>
+              <family>cwp.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>76</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Community Area Number</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Community Area Number]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Community Area Number</remote-alias>
+              <ordinal>3</ordinal>
+              <family>communitymapping.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>76</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>COMMUNITY AREA NAME</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[COMMUNITY AREA NAME]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>COMMUNITY AREA NAME</remote-alias>
+              <ordinal>4</ordinal>
+              <family>communitymapping.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>76</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.442308' measure-ordering='alphabetic' measure-percentage='0.557692' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[:Measure Names]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:count:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:PERCENT HOUSEHOLDS BELOW POVERTY:qk]:1&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:PERCENT HOUSEHOLDS BELOW POVERTY:qk]&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='safecluster' inline='true' name='federated.1ga9tqu1ys15fz1euvzps164tt1c' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='safecluster' name='textscan.15yt3wl1y8pu781e0palv1q4nzul'>
+            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='safecluster.csv' password='' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.15yt3wl1y8pu781e0palv1q4nzul' name='safecluster.csv' table='[safecluster#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+            <column datatype='string' name='Safe Clusters' ordinal='0' />
+            <column datatype='real' name='Latitude' ordinal='1' />
+            <column datatype='real' name='Longitude' ordinal='2' />
+            <column datatype='integer' name='Count' ordinal='3' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[safecluster.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
+              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Safe Clusters</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Safe Clusters]</local-name>
+            <parent-name>[safecluster.csv]</parent-name>
+            <remote-alias>Safe Clusters</remote-alias>
             <ordinal>0</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
@@ -2135,7 +1321,7 @@
             <remote-name>Latitude</remote-name>
             <remote-type>5</remote-type>
             <local-name>[Latitude]</local-name>
-            <parent-name>[RecommendedPlaces.csv]</parent-name>
+            <parent-name>[safecluster.csv]</parent-name>
             <remote-alias>Latitude</remote-alias>
             <ordinal>1</ordinal>
             <local-type>real</local-type>
@@ -2146,10 +1332,21 @@
             <remote-name>Longitude</remote-name>
             <remote-type>5</remote-type>
             <local-name>[Longitude]</local-name>
-            <parent-name>[RecommendedPlaces.csv]</parent-name>
+            <parent-name>[safecluster.csv]</parent-name>
             <remote-alias>Longitude</remote-alias>
             <ordinal>2</ordinal>
             <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Count</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Count]</local-name>
+            <parent-name>[safecluster.csv]</parent-name>
+            <remote-alias>Count</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
           </metadata-record>
@@ -2160,7 +1357,810 @@
       <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
         <calculation class='tableau' formula='1' />
       </column>
-      <layout dim-ordering='alphabetic' dim-percentage='0.463576' measure-ordering='alphabetic' measure-percentage='0.536424' show-structure='true' />
+      <extract count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/safecluster.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:28:51 AM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh>
+            <refresh-event add-from-file-path='safecluster' increment-value='%null%' refresh-type='create' rows-inserted='112' timestamp-start='2019-05-08 07:28:51.480' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>Safe Clusters</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Safe Clusters]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Safe Clusters</remote-alias>
+              <ordinal>0</ordinal>
+              <family>safecluster.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>112</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Latitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Latitude]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Latitude</remote-alias>
+              <ordinal>1</ordinal>
+              <family>safecluster.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>112</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Longitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Longitude]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Longitude</remote-alias>
+              <ordinal>2</ordinal>
+              <family>safecluster.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>112</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Count</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Count]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Count</remote-alias>
+              <ordinal>3</ordinal>
+              <family>safecluster.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>6</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.346154' measure-ordering='alphabetic' measure-percentage='0.653846' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='affordablehouseclusterlist' inline='true' name='federated.1jxr4ni15u799w130rf6c0dmk4go' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='affordablehouseclusterlist' name='textscan.0gjqp9h1qgbylo1aebfcq1xd2m4q'>
+            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='affordablehouseclusterlist.csv' password='' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.0gjqp9h1qgbylo1aebfcq1xd2m4q' name='affordablehouseclusterlist.csv' table='[affordablehouseclusterlist#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+            <column datatype='string' name='Affordable Housing Clusters' ordinal='0' />
+            <column datatype='real' name='Latitude' ordinal='1' />
+            <column datatype='real' name='Longitude' ordinal='2' />
+            <column datatype='integer' name='Count' ordinal='3' />
+          </columns>
+        </relation>
+        <refresh increment-key='' incremental-updates='false' />
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[affordablehouseclusterlist.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
+              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Affordable Housing Clusters</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Affordable Housing Clusters]</local-name>
+            <parent-name>[affordablehouseclusterlist.csv]</parent-name>
+            <remote-alias>Affordable Housing Clusters</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Latitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Latitude]</local-name>
+            <parent-name>[affordablehouseclusterlist.csv]</parent-name>
+            <remote-alias>Latitude</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Longitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Longitude]</local-name>
+            <parent-name>[affordablehouseclusterlist.csv]</parent-name>
+            <remote-alias>Longitude</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Count</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Count]</local-name>
+            <parent-name>[affordablehouseclusterlist.csv]</parent-name>
+            <remote-alias>Count</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <column aggregation='Avg' datatype='real' name='[Latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+      <column aggregation='Avg' datatype='real' name='[Longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <extract count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/affordablehouseclusterlist.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:23:35 AM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh increment-key='' incremental-updates='false'>
+            <refresh-event add-from-file-path='affordablehouseclusterlist' increment-value='%null%' refresh-type='create' rows-inserted='300' timestamp-start='2019-05-08 07:23:35.081' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>Affordable Housing Clusters</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Affordable Housing Clusters]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Affordable Housing Clusters</remote-alias>
+              <ordinal>0</ordinal>
+              <family>affordablehouseclusterlist.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>300</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Latitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Latitude]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Latitude</remote-alias>
+              <ordinal>1</ordinal>
+              <family>affordablehouseclusterlist.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>300</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Longitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Longitude]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Longitude</remote-alias>
+              <ordinal>2</ordinal>
+              <family>affordablehouseclusterlist.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>300</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Count</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Count]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Count</remote-alias>
+              <ordinal>3</ordinal>
+              <family>affordablehouseclusterlist.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>6</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.346154' measure-ordering='alphabetic' measure-percentage='0.653846' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='restaurantsclusterlist' inline='true' name='federated.1a3en4g15gkzk5145lyus0naus00' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='restaurantsclusterlist' name='textscan.1os05cz088xwoa1fssa341vskuy1'>
+            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='restaurantsclusterlist.csv' password='' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.1os05cz088xwoa1fssa341vskuy1' name='restaurantsclusterlist.csv' table='[restaurantsclusterlist#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+            <column datatype='string' name='Restaurant Clusters' ordinal='0' />
+            <column datatype='real' name='Latitude' ordinal='1' />
+            <column datatype='real' name='Longitude' ordinal='2' />
+            <column datatype='integer' name='Count' ordinal='3' />
+          </columns>
+        </relation>
+        <refresh increment-key='' incremental-updates='false' />
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[restaurantsclusterlist.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
+              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Restaurant Clusters</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Restaurant Clusters]</local-name>
+            <parent-name>[restaurantsclusterlist.csv]</parent-name>
+            <remote-alias>Restaurant Clusters</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Latitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Latitude]</local-name>
+            <parent-name>[restaurantsclusterlist.csv]</parent-name>
+            <remote-alias>Latitude</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Longitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Longitude]</local-name>
+            <parent-name>[restaurantsclusterlist.csv]</parent-name>
+            <remote-alias>Longitude</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Count</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Count]</local-name>
+            <parent-name>[restaurantsclusterlist.csv]</parent-name>
+            <remote-alias>Count</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <column aggregation='Avg' datatype='real' name='[Latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+      <column aggregation='Avg' datatype='real' name='[Longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <extract count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/restaurantsclusterlist.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:28:28 AM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh increment-key='' incremental-updates='false'>
+            <refresh-event add-from-file-path='restaurantsclusterlist' increment-value='%null%' refresh-type='create' rows-inserted='300' timestamp-start='2019-05-08 07:28:28.073' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>Restaurant Clusters</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Restaurant Clusters]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Restaurant Clusters</remote-alias>
+              <ordinal>0</ordinal>
+              <family>restaurantsclusterlist.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>300</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Latitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Latitude]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Latitude</remote-alias>
+              <ordinal>1</ordinal>
+              <family>restaurantsclusterlist.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>300</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Longitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Longitude]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Longitude</remote-alias>
+              <ordinal>2</ordinal>
+              <family>restaurantsclusterlist.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>300</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Count</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Count]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Count</remote-alias>
+              <ordinal>3</ordinal>
+              <family>restaurantsclusterlist.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>113</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.302885' measure-ordering='alphabetic' measure-percentage='0.697115' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='sexoffendersclusterlist' inline='true' name='federated.13gcysr1lirajq1doixsn1u1buz2' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='sexoffendersclusterlist' name='textscan.1ordast081vofv16l05qa0oks668'>
+            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='sexoffendersclusterlist.csv' password='' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.1ordast081vofv16l05qa0oks668' name='sexoffendersclusterlist.csv' table='[sexoffendersclusterlist#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+            <column datatype='string' name='Cluster Points' ordinal='0' />
+            <column datatype='real' name='Latitude' ordinal='1' />
+            <column datatype='real' name='Longitude' ordinal='2' />
+            <column datatype='integer' name='Count' ordinal='3' />
+          </columns>
+        </relation>
+        <refresh increment-key='' incremental-updates='false' />
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[sexoffendersclusterlist.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
+              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Cluster Points</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Cluster Points]</local-name>
+            <parent-name>[sexoffendersclusterlist.csv]</parent-name>
+            <remote-alias>Cluster Points</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Latitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Latitude]</local-name>
+            <parent-name>[sexoffendersclusterlist.csv]</parent-name>
+            <remote-alias>Latitude</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Longitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Longitude]</local-name>
+            <parent-name>[sexoffendersclusterlist.csv]</parent-name>
+            <remote-alias>Longitude</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Count</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Count]</local-name>
+            <parent-name>[sexoffendersclusterlist.csv]</parent-name>
+            <remote-alias>Count</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <column aggregation='Avg' datatype='real' name='[Latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+      <column aggregation='Avg' datatype='real' name='[Longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <extract count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/sexoffendersclusterlist.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:29:22 AM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh increment-key='' incremental-updates='false'>
+            <refresh-event add-from-file-path='sexoffendersclusterlist' increment-value='%null%' refresh-type='create' rows-inserted='300' timestamp-start='2019-05-08 07:29:22.051' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>Cluster Points</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Cluster Points]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Cluster Points</remote-alias>
+              <ordinal>0</ordinal>
+              <family>sexoffendersclusterlist.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>300</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Latitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Latitude]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Latitude</remote-alias>
+              <ordinal>1</ordinal>
+              <family>sexoffendersclusterlist.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>300</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Longitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Longitude]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Longitude</remote-alias>
+              <ordinal>2</ordinal>
+              <family>sexoffendersclusterlist.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>300</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Count</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Count]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Count</remote-alias>
+              <ordinal>3</ordinal>
+              <family>sexoffendersclusterlist.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>17</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.350962' measure-ordering='alphabetic' measure-percentage='0.649038' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='cz2.csv+ (Multiple Connections)' inline='true' name='federated.0dpam5s0filj4y17fhu4x0rtr6qx' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='cz2' name='textscan.0i5bebf0w8t4q811xgma70cyse1z'>
+            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/datadata' filename='cz2.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='communitymapping' name='textscan.0drehe21viqrx51fkzeve07gnu4z'>
+            <connection class='textscan' directory='/Users/lakshmigauri/Desktop/CrimeData' filename='communitymapping.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation join='inner' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[cz2.csv].[Community Area]' />
+              <expression op='[communitymapping.csv].[Community Area Number]' />
+            </expression>
+          </clause>
+          <relation connection='textscan.0i5bebf0w8t4q811xgma70cyse1z' name='cz2.csv' table='[cz2#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+              <column datatype='integer' name='Community Area' ordinal='0' />
+              <column datatype='string' name='Primary Type' ordinal='1' />
+              <column datatype='real' name='PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA' ordinal='2' />
+              <column datatype='integer' name='count' ordinal='3' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0drehe21viqrx51fkzeve07gnu4z' name='communitymapping.csv' table='[communitymapping#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
+              <column datatype='integer' name='Community Area Number' ordinal='0' />
+              <column datatype='string' name='COMMUNITY AREA NAME' ordinal='1' />
+            </columns>
+          </relation>
+        </relation>
+        <refresh increment-key='' incremental-updates='false' />
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[cz2.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Community Area</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Community Area]</local-name>
+            <parent-name>[cz2.csv]</parent-name>
+            <remote-alias>Community Area</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Primary Type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Primary Type]</local-name>
+            <parent-name>[cz2.csv]</parent-name>
+            <remote-alias>Primary Type</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]</local-name>
+            <parent-name>[cz2.csv]</parent-name>
+            <remote-alias>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>count</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[count]</local-name>
+            <parent-name>[cz2.csv]</parent-name>
+            <remote-alias>count</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[communitymapping.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
+              <attribute datatype='string' name='record-delimiter'>&quot;\\r&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Community Area Number</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Community Area Number]</local-name>
+            <parent-name>[communitymapping.csv]</parent-name>
+            <remote-alias>Community Area Number</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>COMMUNITY AREA NAME</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[COMMUNITY AREA NAME]</local-name>
+            <parent-name>[communitymapping.csv]</parent-name>
+            <remote-alias>COMMUNITY AREA NAME</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Community Area Name' datatype='string' name='[COMMUNITY AREA NAME]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Percent Aged 25+ Without High School Diploma' datatype='real' name='[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]' role='measure' type='quantitative' />
+      <column caption='Count' datatype='integer' name='[count]' role='measure' type='quantitative' />
+      <column-instance column='[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]' derivation='Sum' name='[sum:PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[count]' derivation='Sum' name='[sum:count:qk]' pivot='key' type='quantitative' />
+      <extract count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/cz2.csv+ (Multiple Connections).hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='05/08/2019 07:56:43 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh increment-key='' incremental-updates='false'>
+            <refresh-event add-from-file-path='cz2.csv+ (Multiple Connections)' increment-value='%null%' refresh-type='create' rows-inserted='1923' timestamp-start='2019-05-08 19:56:43.481' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>Community Area</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Community Area]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Community Area</remote-alias>
+              <ordinal>0</ordinal>
+              <family>cz2.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>77</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Primary Type</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Primary Type]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Primary Type</remote-alias>
+              <ordinal>1</ordinal>
+              <family>cz2.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>29</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-alias>
+              <ordinal>2</ordinal>
+              <family>cz2.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>69</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>count</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[count]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>count</remote-alias>
+              <ordinal>3</ordinal>
+              <family>cz2.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>550</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Community Area Number</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Community Area Number]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Community Area Number</remote-alias>
+              <ordinal>4</ordinal>
+              <family>communitymapping.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>77</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>COMMUNITY AREA NAME</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[COMMUNITY AREA NAME]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>COMMUNITY AREA NAME</remote-alias>
+              <ordinal>5</ordinal>
+              <family>communitymapping.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>77</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.408654' measure-ordering='alphabetic' measure-percentage='0.591346' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[:Measure Names]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.0dpam5s0filj4y17fhu4x0rtr6qx].[sum:count:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.0dpam5s0filj4y17fhu4x0rtr6qx].[sum:PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA:qk]&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
       </semantic-values>
@@ -2320,7 +2320,7 @@
           </metadata-records>
         </connection>
       </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.4375' measure-ordering='alphabetic' measure-percentage='0.5625' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.350962' measure-ordering='alphabetic' measure-percentage='0.649038' show-structure='true' />
       <style>
         <style-rule element='mark'>
           <encoding attr='color' field='[:Measure Names]' type='palette'>
@@ -2494,10 +2494,7 @@
       <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
         <calculation class='tableau' formula='1' />
       </column>
-      <column caption='Percent Of Housing Crowded' datatype='real' name='[PERCENT OF HOUSING CROWDED]' role='measure' type='quantitative' />
       <column aggregation='Hour' datatype='datetime' name='[Time]' role='dimension' type='ordinal' />
-      <column caption='Count' datatype='integer' name='[count]' role='measure' type='quantitative' />
-      <column-instance column='[PERCENT OF HOUSING CROWDED]' derivation='Sum' name='[sum:PERCENT OF HOUSING CROWDED:qk]' pivot='key' type='quantitative' />
       <extract count='-1' enabled='true' units='records'>
         <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/lakshmigauri/Documents/My Tableau Repository/Datasources/cd.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='' username='tableau_internal_user'>
           <relation name='Extract' table='[Extract].[Extract]' type='table' />
@@ -2678,7 +2675,7 @@
           </metadata-records>
         </connection>
       </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.492188' measure-ordering='alphabetic' measure-percentage='0.507812' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.490385' measure-ordering='alphabetic' measure-percentage='0.509615' show-structure='true' />
       <style>
         <style-rule element='mark'>
           <encoding attr='color' field='[:Measure Names]' type='palette'>
@@ -3248,6 +3245,9 @@
             <format attr='line-pattern-only' id='refline2' value='dashed' />
             <format attr='fill-above' id='refline2' value='#f3ebf3' />
             <format attr='stroke-color' id='refline2' value='#e100214b' />
+            <format attr='fill-above' id='refline1' value='#00000000' />
+            <format attr='fill-below' id='refline1' value='#00000000' />
+            <format attr='stroke-color' id='refline1' value='#9d7660' />
           </style-rule>
         </style>
         <panes>
@@ -3260,6 +3260,7 @@
               <color column='[federated.1qxbyk01stqr761e4kapy1mzh8ha].[:Measure Names]' />
             </encodings>
             <reference-line axis-column='[federated.1qxbyk01stqr761e4kapy1mzh8ha].[sum:PER_CAPITA_INCOME:qk]' enable-instant-analytics='true' formula='average' id='refline0' label-type='automatic' probability='95' scope='per-table' value-column='[federated.1qxbyk01stqr761e4kapy1mzh8ha].[sum:PER_CAPITA_INCOME:qk]' z-order='2' />
+            <reference-line axis-column='[federated.1qxbyk01stqr761e4kapy1mzh8ha].[sum:count:qk]' enable-instant-analytics='true' formula='average' id='refline1' label-type='automatic' probability='95' scope='per-table' value-column='[federated.1qxbyk01stqr761e4kapy1mzh8ha].[sum:count:qk]' z-order='3' />
             <reference-line axis-column='[federated.1qxbyk01stqr761e4kapy1mzh8ha].[sum:PERCENT AGED 16+ UNEMPLOYED:qk]' enable-instant-analytics='true' formula='average' id='refline2' label-type='automatic' probability='95' scope='per-table' value-column='[federated.1qxbyk01stqr761e4kapy1mzh8ha].[sum:PERCENT AGED 16+ UNEMPLOYED:qk]' z-order='1' />
           </pane>
           <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.1qxbyk01stqr761e4kapy1mzh8ha].[sum:PER_CAPITA_INCOME:qk]'>
@@ -3316,7 +3317,7 @@
       </table>
       <simple-id uuid='{6153F123-76F8-4489-8187-D6A6332D3744}' />
     </worksheet>
-    <worksheet name='Community Area Wise Crime and 25+ Unemployment'>
+    <worksheet name='Community Area Wise Crime and 25+ Uneducation'>
       <table>
         <view>
           <datasources>
@@ -3342,6 +3343,9 @@
             <format attr='line-visibility' id='refline0' value='on' />
             <format attr='line-pattern-only' id='refline0' value='dashed' />
             <format attr='stroke-color' id='refline0' value='#e10021' />
+            <format attr='fill-above' id='refline1' value='#00000000' />
+            <format attr='fill-below' id='refline1' value='#00000000' />
+            <format attr='stroke-color' id='refline1' value='#9d7660' />
           </style-rule>
         </style>
         <panes>
@@ -3351,6 +3355,7 @@
             </view>
             <mark class='Line' />
             <reference-line axis-column='[federated.0dpam5s0filj4y17fhu4x0rtr6qx].[sum:PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA:qk]' enable-instant-analytics='true' formula='average' id='refline0' label-type='automatic' probability='95' scope='per-table' value-column='[federated.0dpam5s0filj4y17fhu4x0rtr6qx].[sum:PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA:qk]' z-order='1' />
+            <reference-line axis-column='[federated.0dpam5s0filj4y17fhu4x0rtr6qx].[sum:count:qk]' enable-instant-analytics='true' formula='average' id='refline1' label-type='automatic' probability='95' scope='per-table' value-column='[federated.0dpam5s0filj4y17fhu4x0rtr6qx].[sum:count:qk]' z-order='2' />
             <style>
               <style-rule element='mark'>
                 <format attr='mark-color' value='#f28e2b' />
@@ -3409,7 +3414,7 @@
         </view>
         <style>
           <style-rule element='axis'>
-            <encoding attr='space' class='0' field='[federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:count:qk]' field-type='quantitative' fold='true' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:PERCENT HOUSEHOLDS BELOW POVERTY:qk]' field-type='quantitative' fold='true' scope='rows' type='space' />
           </style-rule>
           <style-rule element='refline'>
             <format attr='fill-above' id='refline0' value='#00000000' />
@@ -3448,7 +3453,7 @@
             </encodings>
           </pane>
         </panes>
-        <rows>([federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:PERCENT HOUSEHOLDS BELOW POVERTY:qk] + [federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:count:qk])</rows>
+        <rows>([federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:count:qk] + [federated.14g5xpr05bjwwl12vbyzl1r60q38].[sum:PERCENT HOUSEHOLDS BELOW POVERTY:qk])</rows>
         <cols>[federated.14g5xpr05bjwwl12vbyzl1r60q38].[none:COMMUNITY AREA NAME:nk]</cols>
       </table>
       <simple-id uuid='{FBE8A84D-5CBB-4FDA-8BB0-87E95333E507}' />
@@ -3634,8 +3639,8 @@
         </view>
         <style>
           <style-rule element='axis'>
-            <encoding attr='space' class='0' field='[federated.1ga9tqu1ys15fz1euvzps164tt1c].[avg:Longitude:qk]' field-type='quantitative' max='-9654722.0746399313' min='-9903640.2406968772' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
-            <encoding attr='space' class='0' field='[federated.1ga9tqu1ys15fz1euvzps164tt1c].[avg:Latitude:qk]' field-type='quantitative' max='5168830.575810276' min='5112633.1002833098' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.1ga9tqu1ys15fz1euvzps164tt1c].[avg:Longitude:qk]' field-type='quantitative' max='-9634225.7047721911' min='-9930557.9280187152' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.1ga9tqu1ys15fz1euvzps164tt1c].[avg:Latitude:qk]' field-type='quantitative' max='5172736.5948109142' min='5105834.5959429871' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
           </style-rule>
           <style-rule element='map-layer'>
             <format attr='enabled' id='tab_base' value='true' />
@@ -3996,8 +4001,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1900' minheight='1900' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='42' type='layout-basic' w='100000' x='0' y='0'>
-              <zone h='84000' id='43' param='vert' type='layout-flow' w='84000' x='8000' y='8000'>
+            <zone h='100000' id='44' type='layout-basic' w='100000' x='0' y='0'>
+              <zone h='84000' id='45' param='vert' type='layout-flow' w='84000' x='8000' y='8000'>
                 <zone fixed-size='253' h='32666' id='11' is-fixed='true' name='Affordable Housing in Chicago' show-caption='true' w='41200' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -4171,7 +4176,7 @@
               </zone>
             </zone>
             <zone fixed-size='160' h='98000' id='6' is-fixed='true' param='vert' type='layout-flow' w='16000' x='83200' y='1000'>
-              <zone h='8250' id='8' name='Community Wise Arrests Not Made and Poverty Relation' pane-specification-id='1' param='[federated.14g5xpr05bjwwl12vbyzl1r60q38].[:Measure Names]' type='color' w='16000' x='83200' y='1000'>
+              <zone h='8250' id='8' name='Community Wise Arrests Not Made and Poverty Relation' pane-specification-id='2' param='[federated.14g5xpr05bjwwl12vbyzl1r60q38].[:Measure Names]' type='color' w='16000' x='83200' y='1000'>
                 <zone-style>
                   <format attr='border-color' value='#000000' />
                   <format attr='border-style' value='none' />
@@ -4201,8 +4206,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='13' type='layout-basic' w='100000' x='0' y='0'>
-              <zone h='84000' id='14' param='vert' type='layout-flow' w='84000' x='8000' y='8000'>
+            <zone h='100000' id='15' type='layout-basic' w='100000' x='0' y='0'>
+              <zone h='84000' id='16' param='vert' type='layout-flow' w='84000' x='8000' y='8000'>
                 <zone fixed-size='280' h='49000' id='3' is-fixed='true' name='Community Wise Arrests Not Made and Poverty Relation' w='82400' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -4212,7 +4217,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone h='8250' id='8' name='Community Wise Arrests Not Made and Poverty Relation' pane-specification-id='1' param='[federated.14g5xpr05bjwwl12vbyzl1r60q38].[:Measure Names]' type='color' w='16000' x='83200' y='1000'>
+                <zone h='8250' id='8' name='Community Wise Arrests Not Made and Poverty Relation' pane-specification-id='2' param='[federated.14g5xpr05bjwwl12vbyzl1r60q38].[:Measure Names]' type='color' w='16000' x='83200' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -4275,7 +4280,7 @@
                   <format attr='margin' value='4' />
                 </zone-style>
               </zone>
-              <zone forceUpdate='' h='92750' id='10' param='about:blank' type='web' w='49200' x='800' y='6250'>
+              <zone forceUpdate='' h='92750' id='10' param='https://www.google.com/maps/?q=Palmer Square, Chicago, IL 60647, USA' type='web' w='49200' x='800' y='6250'>
                 <zone-style>
                   <format attr='border-color' value='#000000' />
                   <format attr='border-style' value='none' />
@@ -4297,8 +4302,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='11' type='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='12' param='vert' type='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='14' type='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='15' param='vert' type='layout-flow' w='98400' x='800' y='1000'>
                 <zone h='5250' id='9' type='title' w='98400' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -4308,7 +4313,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' forceUpdate='' h='92750' id='10' is-fixed='true' param='about:blank' type='web' w='49200' x='800' y='6250'>
+                <zone fixed-size='280' forceUpdate='' h='92750' id='10' is-fixed='true' param='https://www.google.com/maps/?q=Palmer Square, Chicago, IL 60647, USA' type='web' w='49200' x='800' y='6250'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -4524,7 +4529,7 @@
         </edge>
         <edge name='right'>
           <strip size='160'>
-            <card pane-specification-id='1' param='[federated.14g5xpr05bjwwl12vbyzl1r60q38].[:Measure Names]' type='color' />
+            <card pane-specification-id='2' param='[federated.14g5xpr05bjwwl12vbyzl1r60q38].[:Measure Names]' type='color' />
           </strip>
         </edge>
       </cards>
@@ -4601,7 +4606,7 @@
       <active id='-1' />
       <simple-id uuid='{ACFCAD6A-F30D-4E09-B6A6-062DE3D352CE}' />
     </window>
-    <window class='worksheet' name='Community Area Wise Crime and 25+ Unemployment'>
+    <window class='worksheet' name='Community Area Wise Crime and 25+ Uneducation'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -4663,7 +4668,16 @@
       </viewpoint>
       <simple-id uuid='{B2F1BE0B-DC89-44A3-8425-7A0FBCBAE1CE}' />
     </window>
-    <window class='worksheet' name='Sheet 11'>
+    <window class='dashboard' maximized='true' name='Recommended Places'>
+      <viewpoints>
+        <viewpoint name='Sheet 11'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='-1' />
+      <simple-id uuid='{F8067623-6DF9-44E6-84D3-F48147D6E82C}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Sheet 11'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -4685,15 +4699,6 @@
         </edge>
       </cards>
       <simple-id uuid='{B75D2C64-F05E-476A-B80A-F758C488DEB5}' />
-    </window>
-    <window class='dashboard' maximized='true' name='Recommended Places'>
-      <viewpoints>
-        <viewpoint name='Sheet 11'>
-          <zoom type='entire-view' />
-        </viewpoint>
-      </viewpoints>
-      <active id='10' />
-      <simple-id uuid='{F8067623-6DF9-44E6-84D3-F48147D6E82C}' />
     </window>
   </windows>
   <thumbnails>
