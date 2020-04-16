@@ -15,7 +15,7 @@ import com.koddi.geocoder.Geocoder
 
  //  println(args.mkString(","))
 
-    //val geoWithKey = Geocoder.create("AIzaSyA7iBwz17N_5hySdDSZGSDerO78_b8XUbw")
+    //val geoWithKey = Geocoder.create("")
     // val results = geoWithKey.lookup(args(0))
     // val location = results.head.geometry.location
     // println(s"Latitude: ${location.latitude}, Longitude: ${location.longitude}")
